@@ -29,9 +29,13 @@ export interface LoginCredentials {
 }
 
 export interface LoginResponse {
-  message?: string;
-  email?: string;
-  success?: boolean;
+  data?: {
+    access_token: string;
+    refresh_token: string;
+    expires_in: number;
+    token_type: string;
+    user: User;
+  };
 }
 
 export interface VerifyOtpPayload {

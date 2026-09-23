@@ -75,9 +75,9 @@ export const authApi = {
    * @returns RefreshTokenResponse containing new access token
    */
   refreshToken: async (refreshToken?: string): Promise<RefreshTokenResponse> => {
-    return apiFetch<RefreshTokenResponse>('/api/v1/admin/auth/refresh-token', {
+    return apiFetch<RefreshTokenResponse>('/api/v1/auth/token/refresh', {
       method: 'POST',
-      body: JSON.stringify(refreshToken ? { refreshToken } : {}),
+      body: JSON.stringify(refreshToken ? { refresh_token: refreshToken } : {}),
       skipAuth: true,
     });
   },

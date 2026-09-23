@@ -54,30 +54,23 @@ export const Login: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       setLoginSuccess(null);
-      // await loginMutation.mutateAsync(data);
-      // setLoginSuccess(`Verification code sent to ${data.email}. Redirecting...`);
-      // setTimeout(() => {
-      //   navigate('/verify-otp', {
-      //     state: {
-      //       email: data.email,
-      //       password: data.password,
-      //     },
-      //     replace: true,
-      //   });
-      // }, 500);
+      const response = await loginMutation.mutateAsync(data);
+      
+      const responseData = response.data;
+      const token = responseData?.access_token;
+      const refreshToken = responseData?.refresh_token;
+      
+      const user = responseData?.user;
 
-      // TEMPORARY: Bypass OTP and login API
-      setAuthSession(
-        {
-          id: 'admin',
-          email: data.email,
-          name: data.email.split('@')[0],
-          role: 'admin',
-        },
-        'dummy_token_for_bypass',
-        null
-      );
-      navigate('/dashboard', { replace: true });
+      if (token && user) {
+        setAuthSession(user, token, refreshToken || null);
+        setLoginSuccess('Authentication successful! Redirecting...');
+        setTimeout(() => {
+          navigate('/dashboard', { replace: true });
+        }, 500);
+      } else {
+        throw new Error('No authentication token received from the server.');
+      }
     } catch {
       // TanStack Query automatically captures the error object in loginMutation.error
     }
