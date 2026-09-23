@@ -7,8 +7,6 @@ import {
   UserCheck,
   Mail,
   Phone,
-  ShieldCheck,
-  CreditCard,
   Layers,
   Activity,
   CheckCircle2,
