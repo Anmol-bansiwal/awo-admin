@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../hooks/useAuthMutations';
+import { useAuthStore } from '../store/useAuthStore';
 import { AwoLoader, AwoLogo } from '../components/AwoLoader';
 
 // Schema for form validation
@@ -33,6 +34,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   const loginMutation = useLoginMutation();
+  const setAuthSession = useAuthStore((state) => state.setAuthSession);
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState<string | null>(null);
@@ -52,17 +54,30 @@ export const Login: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       setLoginSuccess(null);
-      await loginMutation.mutateAsync(data);
-      setLoginSuccess(`Verification code sent to ${data.email}. Redirecting...`);
-      setTimeout(() => {
-        navigate('/verify-otp', {
-          state: {
-            email: data.email,
-            password: data.password,
-          },
-          replace: true,
-        });
-      }, 500);
+      // await loginMutation.mutateAsync(data);
+      // setLoginSuccess(`Verification code sent to ${data.email}. Redirecting...`);
+      // setTimeout(() => {
+      //   navigate('/verify-otp', {
+      //     state: {
+      //       email: data.email,
+      //       password: data.password,
+      //     },
+      //     replace: true,
+      //   });
+      // }, 500);
+
+      // TEMPORARY: Bypass OTP and login API
+      setAuthSession(
+        {
+          id: 'admin',
+          email: data.email,
+          name: data.email.split('@')[0],
+          role: 'admin',
+        },
+        'dummy_token_for_bypass',
+        null
+      );
+      navigate('/dashboard', { replace: true });
     } catch {
       // TanStack Query automatically captures the error object in loginMutation.error
     }
