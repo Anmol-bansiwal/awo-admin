@@ -194,15 +194,31 @@ export function DataTable<T>({
       {pagination && !isLoading && !isError && data.length > 0 && (
         <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
           <div>
-            Showing{' '}
-            <span className="font-bold text-slate-800 dark:text-slate-200">
-              {Math.min(totalItems, (currentPage - 1) * pageSize + 1)}
-            </span>{' '}
-            to{' '}
-            <span className="font-bold text-slate-800 dark:text-slate-200">
-              {Math.min(totalItems, currentPage * pageSize)}
-            </span>{' '}
-            of <span className="font-bold text-slate-800 dark:text-slate-200">{totalItems}</span> {itemName}
+            {totalItems <= pageSize && currentPage === 1 ? (
+              <>
+                Showing all{' '}
+                <span className="font-bold text-slate-800 dark:text-slate-200">
+                  {totalItems}
+                </span>{' '}
+                {itemName}
+              </>
+            ) : (
+              <>
+                Showing{' '}
+                <span className="font-bold text-slate-800 dark:text-slate-200">
+                  {Math.min(totalItems, (currentPage - 1) * pageSize + 1)}
+                </span>
+                {Math.min(totalItems, (currentPage - 1) * pageSize + 1) !== Math.min(totalItems, currentPage * pageSize) && (
+                  <>
+                    {' '}to{' '}
+                    <span className="font-bold text-slate-800 dark:text-slate-200">
+                      {Math.min(totalItems, currentPage * pageSize)}
+                    </span>
+                  </>
+                )}{' '}
+                of <span className="font-bold text-slate-800 dark:text-slate-200">{totalItems}</span> {itemName}
+              </>
+            )}
           </div>
 
           <div className="flex items-center space-x-1.5">
