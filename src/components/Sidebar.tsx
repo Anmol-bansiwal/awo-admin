@@ -29,6 +29,7 @@ import {
   FileText,
   Activity,
   Banknote,
+  User,
 } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
 import { useCurrentAdminQuery } from '../hooks/useAuthMutations';
@@ -349,14 +350,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
             >
               <div className="relative shrink-0">
-                <img
-                  src={
-                    currentAdmin?.avatarUrl ||
-                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80'
-                  }
-                  alt={adminName}
-                  className="w-10 h-10 rounded-full object-cover ring-2 ring-emerald-500/30 shrink-0"
-                />
+                {currentAdmin?.avatarUrl ? (
+                  <img
+                    src={currentAdmin.avatarUrl}
+                    alt={adminName}
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-emerald-500/30 shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center ring-2 ring-emerald-500/30 shrink-0 text-emerald-600 dark:text-emerald-400">
+                    <User className="w-5 h-5" />
+                  </div>
+                )}
                 {isStatusActive && (
                   <span
                     className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900"
