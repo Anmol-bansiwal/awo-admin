@@ -94,7 +94,7 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
                 {provider.full_name || 'Provider'}
               </h1>
               <ProviderStatusBadge status={provider.status} />
-              <ProviderKycStatusBadge kycStatus={profile?.kyc_status} />
+              <ProviderKycStatusBadge kycStatus={profile?.kyc_status ?? provider.kyc_status} />
             </div>
 
             <p className="text-xs text-slate-500 dark:text-slate-400 font-normal">{provider.email || '—'}</p>

@@ -68,7 +68,7 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
   const profile = provider.provider;
   const skills = profile?.skills || [];
   const serviceAreas = provider.service_areas || [];
-  const kycStatus = profile?.kyc_status || 'pending';
+  const kycStatus = profile?.kyc_status || provider.kyc_status || 'pending';
 
   // Primary location text
   const primaryLocation =

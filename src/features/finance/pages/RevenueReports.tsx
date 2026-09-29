@@ -13,7 +13,7 @@ export const RevenueReports: React.FC = () => {
   const summary = report?.summary;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full min-w-0">
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -79,13 +79,13 @@ export const RevenueReports: React.FC = () => {
       )}
 
       {/* REPORT PERIOD FILTER TOOLBAR */}
-      <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between transition-colors">
+      <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between transition-colors">
         <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
           <Calendar className="w-4 h-4 text-slate-400 dark:text-slate-500" />
           <span>Aggregation Granularity:</span>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl overflow-x-auto no-scrollbar">
           {(['daily', 'weekly', 'monthly', 'yearly'] as const).map((p) => (
             <button
               key={p}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
   Calendar,
   Clock,
@@ -128,7 +129,12 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
   return (
     <div className="space-y-6">
       {/* TOP SUMMARY HEADER CARD */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25 }}
+        className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors"
+      >
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div>
             <div className="flex items-center gap-3">
@@ -225,10 +231,15 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
             })}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* TWO-COLUMN DETAILS GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, delay: 0.08 }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+      >
         {/* CUSTOMER INFORMATION CARD */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
@@ -377,11 +388,16 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
         </div>
 
 
-      </div>
+      </motion.div>
 
       {/* PROVIDER ACTIVITIES TIMELINE (If provided by backend API) */}
       {booking.progress_history && booking.progress_history.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, delay: 0.16 }}
+          className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors"
+        >
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
             <FileText className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Provider Activity Log</h3>
@@ -409,7 +425,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

@@ -81,7 +81,7 @@ export function DataTable<T>({
 
       {/* Main Table Content / States with both X and Y scroll capability */}
       <div
-        className={`overflow-auto min-h-[220px] relative w-full min-w-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
+        className={`overflow-auto no-scrollbar min-h-[220px] relative w-full min-w-0 ${
           maxHeight ? '' : 'max-h-[620px]'
         } ${containerClassName}`}
         style={maxHeight ? { maxHeight } : undefined}
@@ -133,8 +133,8 @@ export function DataTable<T>({
 
         {/* Real Data Table */}
         {!isLoading && !isError && data.length > 0 && (
-          <table className={`w-full text-left border-collapse min-w-max ${tableClassName}`}>
-            <thead className="sticky top-0 z-10 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-xs border-b border-slate-200/80 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shadow-2xs">
+          <table className={`w-full text-left border-collapse min-w-full ${tableClassName}`}>
+            <thead className="sticky top-0 z-10 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-xs border-b border-slate-200/80 dark:border-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shadow-2xs">
               <tr>
                 {columns.map((col) => {
                   const alignClass =
@@ -147,7 +147,7 @@ export function DataTable<T>({
                   return (
                     <th
                       key={col.key}
-                      className={`py-3.5 px-6 ${alignClass} ${col.headerClassName || ''}`}
+                      className={`py-2.5 px-3 sm:px-3.5 ${alignClass} ${col.headerClassName || ''}`}
                     >
                       {col.header}
                     </th>
@@ -177,7 +177,7 @@ export function DataTable<T>({
                     return (
                       <td
                         key={col.key}
-                        className={`py-4 px-6 ${alignClass} ${col.className || ''}`}
+                        className={`py-2.5 px-3 sm:px-3.5 ${alignClass} ${col.className || ''}`}
                       >
                         {col.render ? col.render(item, index) : (item as any)[col.key]}
                       </td>

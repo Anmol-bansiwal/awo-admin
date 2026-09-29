@@ -34,11 +34,11 @@ export const RefundTable: React.FC<RefundTableProps> = ({
       key: 'refund_code',
       header: 'Refund ID',
       render: (refund) => (
-        <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800/40">
-            <RotateCcw className="w-4 h-4" />
+        <div className="flex items-center space-x-2">
+          <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800/40">
+            <RotateCcw className="w-3.5 h-3.5" />
           </div>
-          <span className="font-bold text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
             {refund.refund_code || `#${refund.id.slice(0, 8)}`}
           </span>
         </div>
@@ -54,12 +54,12 @@ export const RefundTable: React.FC<RefundTableProps> = ({
           (refund.customer_id ? `Customer #${refund.customer_id.slice(0, 8)}` : '—');
 
         return (
-          <div>
-            <span className="font-semibold text-slate-900 dark:text-white block truncate">
+          <div className="min-w-0 max-w-[130px]">
+            <span className="font-semibold text-xs text-slate-900 dark:text-white block truncate">
               {customerName}
             </span>
             {refund.customer?.email && (
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 block truncate">
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
                 {refund.customer.email}
               </span>
             )}
@@ -70,8 +70,9 @@ export const RefundTable: React.FC<RefundTableProps> = ({
     {
       key: 'amount',
       header: 'Amount',
+      className: 'whitespace-nowrap',
       render: (refund) => (
-        <span className="font-bold text-slate-900 dark:text-white text-sm">
+        <span className="font-bold text-slate-900 dark:text-white text-xs">
           {formatMoney(refund.amount, refund.currency)}
         </span>
       ),
@@ -79,25 +80,26 @@ export const RefundTable: React.FC<RefundTableProps> = ({
     {
       key: 'booking_code',
       header: 'Booking Ref',
-      className: 'font-mono text-slate-700 dark:text-slate-300',
+      className: 'font-mono text-xs text-slate-700 dark:text-slate-300 whitespace-nowrap',
       render: (refund) =>
         refund.booking_code || (refund.booking_id ? `#${refund.booking_id.slice(0, 8)}` : '—'),
     },
     {
       key: 'reason',
       header: 'Reason',
-      className: 'max-w-xs truncate text-slate-600 dark:text-slate-400',
+      className: 'max-w-[140px] truncate text-xs text-slate-600 dark:text-slate-400',
       render: (refund) => refund.reason || '—',
     },
     {
       key: 'status',
       header: 'Status',
-      render: (refund) => <FinanceStatus status={refund.status} />,
+      className: 'whitespace-nowrap',
+      render: (refund) => <FinanceStatus status={refund.status} size="sm" />,
     },
     {
       key: 'created_at',
       header: 'Date',
-      className: 'whitespace-nowrap text-slate-500 dark:text-slate-400',
+      className: 'whitespace-nowrap text-[11px] text-slate-500 dark:text-slate-400',
       render: (refund) => formatFinanceDate(refund.created_at),
     },
     {
@@ -111,10 +113,10 @@ export const RefundTable: React.FC<RefundTableProps> = ({
             e.stopPropagation();
             onViewDetails(refund);
           }}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="View Refund Details"
         >
-          <Eye className="w-4 h-4" />
+          <Eye className="w-3.5 h-3.5" />
         </button>
       ),
     },

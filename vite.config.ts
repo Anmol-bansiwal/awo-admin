@@ -20,7 +20,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://13.42.82.8/awo',
+        target: 'https://awo-api.mobileappdeveloperindia.com',
         changeOrigin: true,
         secure: false,
         headers: {

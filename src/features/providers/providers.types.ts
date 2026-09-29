@@ -43,6 +43,7 @@ export interface ServiceArea {
 }
 
 export interface Provider extends UserListItem {
+  kyc_status?: KycStatus | null;
   provider?: ProviderProfile | null;
   service_areas?: ServiceArea[];
 }

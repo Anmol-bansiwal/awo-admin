@@ -31,17 +31,31 @@ export const ProviderKycStatusBadge: React.FC<{
   kycStatus?: string | null;
   className?: string;
 }> = ({ kycStatus, className = '' }) => {
-  const status = (kycStatus || 'pending').toUpperCase();
+  if (!kycStatus) {
+    return (
+      <span className={`inline-flex items-center text-xs text-slate-400 dark:text-slate-500 font-medium ${className}`}>
+        —
+      </span>
+    );
+  }
+
+  const normalized = kycStatus.trim().toUpperCase();
 
   let variant: StatusBadgeVariant = 'warning';
   let label = 'KYC Pending';
 
-  if (status === 'APPROVED') {
+  if (normalized === 'APPROVED' || normalized === 'VERIFIED') {
     variant = 'success';
     label = 'KYC Approved';
-  } else if (status === 'REJECTED') {
+  } else if (normalized === 'REJECTED') {
     variant = 'danger';
     label = 'KYC Rejected';
+  } else if (normalized === 'PENDING' || normalized === 'IN_REVIEW' || normalized === 'SUBMITTED') {
+    variant = 'warning';
+    label = 'KYC Pending';
+  } else {
+    variant = 'neutral';
+    label = `KYC ${kycStatus}`;
   }
 
   return (

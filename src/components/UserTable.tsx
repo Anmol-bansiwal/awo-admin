@@ -17,6 +17,7 @@ export function UserTable<T extends UserListItem>({
   searchPlaceholder = 'Search users...',
   renderActions,
   renderStatus,
+
   emptyMessage,
   onUserClick,
   onRowClick,

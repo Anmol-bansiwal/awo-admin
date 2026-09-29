@@ -16,6 +16,21 @@ import {
 } from 'lucide-react';
 import { useCustomersQuery, CUSTOMERS_QUERY_KEY } from '../features/customers/hooks/useCustomers';
 import { useProvidersQuery, PROVIDERS_QUERY_KEY } from '../features/providers/hooks/useProviders';
+import { useBookingsQuery, BOOKINGS_QUERY_KEY } from '../features/bookings/hooks/useBookings';
+import { useBookingTrendsQuery, ANALYTICS_QUERY_KEYS } from '../features/analytics/hooks/useAnalytics';
+import type { AnalyticsDateRange } from '../features/analytics/analytics.types';
+import type { Booking } from '../features/bookings/bookings.types';
+import { BookingStatus } from '../features/bookings/components/BookingStatus';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
 interface MetricCardProps {
   title: string;
@@ -97,6 +112,22 @@ export const Dashboard: React.FC = () => {
   const customersQuery = useCustomersQuery(1, 1);
   const providersQuery = useProvidersQuery(1, 1);
   const pendingKycQuery = useProvidersQuery(1, 1, 'pending');
+  const activeBookingsQuery = useBookingsQuery(1, 1, 'PENDING');
+  const completedBookingsQuery = useBookingsQuery(1, 1, 'COMPLETED');
+  const rejectedBookingsQuery = useBookingsQuery(1, 1, 'REJECTED');
+
+  const mapRangeToKey = (label: string): AnalyticsDateRange => {
+    if (label === 'Last 7 Days') return '7d';
+    if (label === 'This Year') return '12m';
+    return '30d';
+  };
+
+  const currentRangeKey = mapRangeToKey(timeRange);
+  const bookingTrendsQuery = useBookingTrendsQuery(currentRangeKey);
+  const recentBookingsQuery = useBookingsQuery(1, 6);
+  const recentBookings: Booking[] = Array.isArray(recentBookingsQuery.data?.data)
+    ? recentBookingsQuery.data.data
+    : [];
 
   /**
    * Refetches live backend query data and simulates refresh spinner.
@@ -108,9 +139,12 @@ export const Dashboard: React.FC = () => {
     if (newRange) {
       setTimeRange(newRange);
     }
+    const rangeKey = mapRangeToKey(newRange || timeRange);
     await Promise.allSettled([
       queryClient.invalidateQueries({ queryKey: CUSTOMERS_QUERY_KEY }),
       queryClient.invalidateQueries({ queryKey: PROVIDERS_QUERY_KEY }),
+      queryClient.invalidateQueries({ queryKey: BOOKINGS_QUERY_KEY }),
+      queryClient.invalidateQueries({ queryKey: ANALYTICS_QUERY_KEYS.bookingTrends(rangeKey) }),
     ]);
     setTimeout(() => {
       setIsRefreshing(false);
@@ -139,7 +173,28 @@ export const Dashboard: React.FC = () => {
       ? '...'
       : '0';
 
-  // Metrics: Live for Customers, Providers & Pending KYC; static for unbacked metrics
+  const liveActiveBookings =
+    activeBookingsQuery.data?.metadata?.total !== undefined
+      ? activeBookingsQuery.data.metadata.total.toLocaleString()
+      : activeBookingsQuery.isLoading
+      ? '...'
+      : '0';
+
+  const liveCompletedBookings =
+    completedBookingsQuery.data?.metadata?.total !== undefined
+      ? completedBookingsQuery.data.metadata.total.toLocaleString()
+      : completedBookingsQuery.isLoading
+      ? '...'
+      : '0';
+
+  const liveRejectedBookings =
+    rejectedBookingsQuery.data?.metadata?.total !== undefined
+      ? rejectedBookingsQuery.data.metadata.total.toLocaleString()
+      : rejectedBookingsQuery.isLoading
+      ? '...'
+      : '0';
+
+  // Metrics: Live for Customers, Providers, Pending KYC & Bookings; static for unbacked metrics
   const metrics: MetricCardProps[] = [
     {
       title: 'TOTAL USERS',
@@ -171,16 +226,18 @@ export const Dashboard: React.FC = () => {
     },
     {
       title: 'ACTIVE BOOKINGS',
-      value: '435',
+      value: liveActiveBookings,
       subtitle: 'In progress today',
+      isLive: true,
       icon: Calendar,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
       iconColor: 'text-[#006E1C] dark:text-emerald-400',
     },
     {
       title: 'COMPLETED BOOKINGS',
-      value: '4,830',
+      value: liveCompletedBookings,
       subtitle: 'All time',
+      isLive: true,
       icon: CheckCircle,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
       iconColor: 'text-[#006E1C] dark:text-emerald-400',
@@ -202,51 +259,19 @@ export const Dashboard: React.FC = () => {
       iconColor: 'text-slate-700 dark:text-slate-300',
     },
     {
-      title: 'OPEN COMPLAINTS',
-      value: '12',
-      subtitle: 'Needs attention',
+      title: 'REJECTED BOOKINGS',
+      value: liveRejectedBookings,
+      subtitle: 'Cancelled or declined',
       isWarning: true,
+      isLive: true,
       icon: AlertTriangle,
       iconBgColor: 'bg-rose-50 dark:bg-rose-950/40',
       iconColor: 'text-rose-600 dark:text-rose-400',
     },
   ];
 
-  // Static sample recent bookings
-  const staticRecentBookings = [
-    {
-      id: 'BK-9021',
-      customer: 'Johnathan Miller',
-      provider: 'Michael Dubois',
-      service: 'Plumbing & Drainage',
-      status: 'Active',
-      statusType: 'success',
-    },
-    {
-      id: 'BK-9022',
-      customer: 'Elena Rostova',
-      provider: 'Claire Moreau',
-      service: 'Home Cleaning',
-      status: 'Completed',
-      statusType: 'secondary',
-    },
-    {
-      id: 'BK-9023',
-      customer: 'David Guerin',
-      provider: 'Alex Fontana',
-      service: 'Electrical Diagnostics',
-      status: 'Pending',
-      statusType: 'warning',
-    },
-    {
-      id: 'BK-9024',
-      customer: 'Lisa Bernard',
-      provider: 'Tom Roux',
-      service: 'Gardening & Landscaping',
-      status: 'Active',
-      statusType: 'success',
-    },
-  ];
+  const trendsData = bookingTrendsQuery.data;
+  const timelineData = trendsData?.timeline || [];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300 relative">
@@ -264,8 +289,8 @@ export const Dashboard: React.FC = () => {
           className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-2xs transition-all cursor-pointer"
         >
           <RefreshCw
-            className={`w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 ${
-              isRefreshing ? 'animate-spin' : ''
+            className={`w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 
+              ${isRefreshing ? 'animate-spin' : ''
             }`}
           />
           <span>{isRefreshing ? 'Refreshing...' : 'Refresh Metrics'}</span>
@@ -281,84 +306,115 @@ export const Dashboard: React.FC = () => {
 
       {/* LOWER SECTION: BOOKING TRENDS & RECENT BOOKINGS */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* BOOKING TRENDS CHART CARD (2 COLS) - STATIC VISUALIZATION */}
+        {/* BOOKING TRENDS CHART CARD (2 COLS) - DYNAMIC VISUALIZATION */}
         <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between transition-colors duration-200">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
-                Booking Trends
-              </h2>
+              <div className="flex items-center space-x-2">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+                  Booking Trends
+                </h2>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="Live Backend Data" />
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Activity volume breakdown by status
+              </p>
             </div>
 
-            {/* Time Range Selector */}
-            <div className="relative inline-block text-left">
-              <button
-                type="button"
-                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-                onClick={() => {
-                  const options = ['Last 7 Days', 'Last 30 Days', 'This Year'];
-                  const nextIndex = (options.indexOf(timeRange) + 1) % options.length;
-                  handleRefreshData(options[nextIndex]);
-                }}
-              >
-                <span>{timeRange}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
-              </button>
+            <div className="flex items-center gap-3">
+              {trendsData?.summary && (
+                <div className="hidden sm:flex items-center gap-2 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold border border-emerald-200/60 dark:border-emerald-800/40">
+                    {trendsData.summary.completionRate}% Done
+                  </span>
+                  <span className="text-slate-500 dark:text-slate-400 font-medium">
+                    <strong className="text-slate-900 dark:text-white font-extrabold">{trendsData.summary.totalBookings.toLocaleString()}</strong> Total
+                  </span>
+                </div>
+              )}
+
+              {/* Time Range Selector */}
+              <div className="relative inline-block text-left">
+                <button
+                  type="button"
+                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                  onClick={() => {
+                    const options = ['Last 7 Days', 'Last 30 Days', 'This Year'];
+                    const nextIndex = (options.indexOf(timeRange) + 1) % options.length;
+                    handleRefreshData(options[nextIndex]);
+                  }}
+                >
+                  <span>{timeRange}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* VISUAL CHART AREA */}
-          <div className="relative h-64 sm:h-72 w-full bg-slate-50/70 dark:bg-slate-950/50 border border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-4 flex items-end justify-between gap-3 overflow-hidden">
-            {/* Chart Grid Lines */}
-            <div className="absolute inset-0 flex flex-col justify-between p-4 pointer-events-none opacity-30">
-              <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
-              <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
-              <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
-              <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
-            </div>
-
-            {/* Simulated Chart Bars */}
-            {[
-              { height: '25%', label: 'W1' },
-              { height: '40%', label: 'W2' },
-              { height: '55%', label: 'W3' },
-              { height: '50%', label: 'W4' },
-              { height: '65%', label: 'W5' },
-              { height: '80%', label: 'W6' },
-              { height: '95%', label: 'W7' },
-            ].map((bar, i) => (
-              <div
-                key={i}
-                className="flex-1 flex flex-col items-center h-full justify-end group z-10"
-              >
-                <div
-                  style={{ height: bar.height }}
-                  className="w-full bg-[#006E1C]/40 group-hover:bg-[#006E1C] dark:bg-emerald-500/30 dark:group-hover:bg-emerald-500 rounded-t-lg transition-all duration-300 cursor-pointer relative"
-                >
-                  {/* Tooltip on Hover */}
-                  <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded-xs pointer-events-none transition-opacity whitespace-nowrap z-20 border border-slate-700/60 shadow-md">
-                    {bar.height} Growth
-                  </div>
-                </div>
+          {/* DYNAMIC CHART AREA */}
+          <div className="h-64 sm:h-72 w-full">
+            {bookingTrendsQuery.isLoading ? (
+              <div className="h-full w-full bg-slate-50/70 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center animate-pulse">
+                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
+                  Loading booking trends...
+                </span>
               </div>
-            ))}
-
-            {/* Label watermark overlay */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 bg-white/80 dark:bg-slate-900/80 px-3 py-1 rounded-full shadow-xs border border-slate-200 dark:border-slate-800">
-                Chart Area (Platform Growth)
-              </span>
-            </div>
+            ) : timelineData.length === 0 ? (
+              <div className="h-full w-full bg-slate-50/70 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center">
+                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
+                  No booking trends data available for this range
+                </span>
+              </div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={timelineData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" opacity={0.5} />
+                  <XAxis
+                    dataKey="label"
+                    tick={{ fontSize: 11, fill: '#94A3B8' }}
+                    axisLine={{ stroke: '#CBD5E1' }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 11, fill: '#94A3B8' }}
+                    axisLine={false}
+                    tickLine={false}
+                    allowDecimals={false}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#0F172A',
+                      borderRadius: '12px',
+                      border: '1px solid #1E293B',
+                      color: '#fff',
+                      fontSize: '11px',
+                      padding: '8px 12px',
+                    }}
+                    labelStyle={{ fontWeight: 'bold', marginBottom: '4px', color: '#F8FAFC' }}
+                  />
+                  <Legend
+                    verticalAlign="top"
+                    align="right"
+                    iconType="circle"
+                    wrapperStyle={{ fontSize: '11px', paddingBottom: '8px' }}
+                  />
+                  <Bar dataKey="completed" name="Completed" fill="#006E1C" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="active" name="Active / In Progress" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="cancelled" name="Cancelled" fill="#EF4444" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
 
-        {/* RECENT BOOKINGS TABLE CARD (1 COL) - STATIC PREVIEW */}
+        {/* RECENT BOOKINGS TABLE CARD (1 COL) - DYNAMIC FROM API */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between overflow-hidden transition-colors duration-200">
           <div className="p-6 pb-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-            <div>
+            <div className="flex items-center space-x-2">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
                 Recent Bookings
               </h2>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="Live Backend Data" />
             </div>
             <Link
               to="/bookings"
@@ -368,51 +424,74 @@ export const Dashboard: React.FC = () => {
             </Link>
           </div>
 
-          <div className="overflow-x-auto flex-1">
+          <div className="overflow-x-auto flex-1 no-scrollbar">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200/60 dark:border-slate-800">
-                  <th className="py-3 px-6 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-inter">
+                  <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-inter">
                     DETAILS
                   </th>
-                  <th className="py-3 px-6 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-inter text-right">
+                  <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-inter text-right">
                     STATUS
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
-                {staticRecentBookings.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors"
-                  >
-                    <td className="py-3.5 px-6">
-                      <div className="font-semibold text-slate-900 dark:text-slate-100 text-xs">
-                        {item.customer} &rarr; {item.provider}
-                      </div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
-                        {item.service}
-                      </div>
-                    </td>
-                    <td className="py-3.5 px-6 text-right">
-                      {item.statusType === 'success' && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40">
-                          Active
-                        </span>
-                      )}
-                      {item.statusType === 'secondary' && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-slate-700">
-                          Completed
-                        </span>
-                      )}
-                      {item.statusType === 'warning' && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200/60 dark:border-rose-800/40">
-                          Pending
-                        </span>
-                      )}
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs">
+                {recentBookingsQuery.isLoading ? (
+                  [...Array(5)].map((_, i) => (
+                    <tr key={i} className="animate-pulse">
+                      <td className="py-3 px-4">
+                        <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded-md w-3/4 mb-1.5" />
+                        <div className="h-2.5 bg-slate-100 dark:bg-slate-800/60 rounded-md w-1/2" />
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <div className="h-5 bg-slate-200 dark:bg-slate-800 rounded-full w-16 ml-auto" />
+                      </td>
+                    </tr>
+                  ))
+                ) : recentBookings.length === 0 ? (
+                  <tr>
+                    <td colSpan={2} className="py-8 text-center text-xs text-slate-400 dark:text-slate-500">
+                      No recent bookings found
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  recentBookings.map((item) => {
+                    const customerName = item.customer?.full_name || item.customer?.name || 'Customer';
+                    const providerName = item.provider?.full_name || item.provider?.name || 'Unassigned';
+                    const serviceName =
+                      typeof item.service === 'string'
+                        ? item.service
+                        : item.service?.name || item.service?.title || item.service_name || 'General Service';
+                    const bookingCode = item.booking_code || (item.id ? `#${item.id.slice(0, 8)}` : '');
+
+                    return (
+                      <tr
+                        key={item.id}
+                        className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors group"
+                      >
+                        <td className="py-3 px-4">
+                          <Link
+                            to={`/bookings/${item.id}`}
+                            className="block font-semibold text-slate-900 dark:text-slate-100 text-xs hover:text-[#006E1C] dark:hover:text-emerald-400 transition-colors truncate max-w-[200px]"
+                          >
+                            <span>{customerName}</span>
+                            <span className="text-slate-400 mx-1.5">→</span>
+                            <span className="text-slate-600 dark:text-slate-300 font-medium">{providerName}</span>
+                          </Link>
+                          <div className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center space-x-1.5 mt-0.5 font-mono">
+                            {bookingCode && <span className="font-bold text-slate-500 dark:text-slate-400">{bookingCode}</span>}
+                            {bookingCode && <span>•</span>}
+                            <span className="truncate max-w-[140px]">{serviceName}</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 text-right whitespace-nowrap">
+                          <BookingStatus status={item.status} size="sm" />
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>

@@ -34,11 +34,11 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
       key: 'payout_code',
       header: 'Payout Code / ID',
       render: (payout) => (
-        <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-800/40">
-            <ArrowUpRight className="w-4 h-4" />
+        <div className="flex items-center space-x-2">
+          <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-800/40">
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </div>
-          <span className="font-bold text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
             {payout.payout_code || `#${payout.id.slice(0, 8)}`}
           </span>
         </div>
@@ -54,12 +54,12 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
           (payout.provider_id ? `Provider #${payout.provider_id.slice(0, 8)}` : '—');
 
         return (
-          <div>
-            <span className="font-semibold text-slate-900 dark:text-white block truncate">
+          <div className="min-w-0 max-w-[130px]">
+            <span className="font-semibold text-xs text-slate-900 dark:text-white block truncate">
               {providerName}
             </span>
             {payout.provider?.email && (
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 block truncate">
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
                 {payout.provider.email}
               </span>
             )}
@@ -70,8 +70,9 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
     {
       key: 'amount',
       header: 'Amount',
+      className: 'whitespace-nowrap',
       render: (payout) => (
-        <span className="font-bold text-slate-900 dark:text-white text-sm">
+        <span className="font-bold text-slate-900 dark:text-white text-xs">
           {formatMoney(payout.amount, payout.currency)}
         </span>
       ),
@@ -79,25 +80,26 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
     {
       key: 'booking_code',
       header: 'Booking Ref',
-      className: 'font-mono text-slate-700 dark:text-slate-300',
+      className: 'font-mono text-xs text-slate-700 dark:text-slate-300 whitespace-nowrap',
       render: (payout) =>
         payout.booking_code || (payout.booking_id ? `#${payout.booking_id.slice(0, 8)}` : '—'),
     },
     {
       key: 'payout_method',
       header: 'Payout Method',
-      className: 'text-slate-700 dark:text-slate-300',
+      className: 'text-xs text-slate-700 dark:text-slate-300 whitespace-nowrap',
       render: (payout) => payout.payout_method || 'Bank Transfer',
     },
     {
       key: 'status',
       header: 'Status',
-      render: (payout) => <FinanceStatus status={payout.status} />,
+      className: 'whitespace-nowrap',
+      render: (payout) => <FinanceStatus status={payout.status} size="sm" />,
     },
     {
       key: 'date',
       header: 'Date',
-      className: 'whitespace-nowrap text-slate-500 dark:text-slate-400',
+      className: 'whitespace-nowrap text-[11px] text-slate-500 dark:text-slate-400',
       render: (payout) =>
         formatFinanceDate(payout.processed_at || payout.requested_at || payout.created_at),
     },
@@ -112,10 +114,10 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
             e.stopPropagation();
             onViewDetails(payout);
           }}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="View Payout Details"
         >
-          <Eye className="w-4 h-4" />
+          <Eye className="w-3.5 h-3.5" />
         </button>
       ),
     },

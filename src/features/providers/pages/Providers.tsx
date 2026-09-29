@@ -5,9 +5,7 @@ import {
   useSuspendProviderMutation,
   useReactivateProviderMutation,
 } from '../hooks/useProviders';
-import { UserTable } from '../../../components/UserTable';
-import { ProviderStatusBadge } from '../components/ProviderStatus';
-import { ProviderActions } from '../components/ProviderActions';
+import { ProviderTable } from '../components/ProviderTable';
 import { ProviderConfirmModal } from '../components/ProviderConfirmModal';
 import { UserDetailsDrawer } from '../../../components/UserDetailsDrawer';
 import { ProviderKycModal } from '../components/ProviderKycModal';
@@ -110,6 +108,9 @@ export const Providers: React.FC = () => {
   const isActionPending = suspendMutation.isPending || reactivateMutation.isPending;
 
   const rawProviders: Provider[] = data?.data || [];
+  if (rawProviders.length > 0) {
+    console.log('Provider list API response item sample:', rawProviders[0]);
+  }
 
   const filteredProviders = searchQuery.trim()
     ? rawProviders.filter((p) => {
@@ -137,10 +138,10 @@ export const Providers: React.FC = () => {
         </div>
       )}
 
-      {/* Shared Reusable UserTable */}
-      <UserTable<Provider>
-        items={filteredProviders}
-        totalItems={data?.metadata?.total ?? rawProviders.length}
+      {/* Dedicated Provider Management Table */}
+      <ProviderTable
+        providers={filteredProviders}
+        totalProviders={data?.metadata?.total ?? rawProviders.length}
         currentPage={data?.metadata?.page ?? page}
         pageSize={data?.metadata?.page_size ?? PAGE_SIZE}
         onPageChange={setPage}
@@ -151,17 +152,10 @@ export const Providers: React.FC = () => {
         onSearchChange={setSearchQuery}
         searchPlaceholder="Search providers..."
         emptyMessage="No providers found."
-        onUserClick={handleViewDetails}
-        renderStatus={(provider) => <ProviderStatusBadge status={provider.status} />}
-        renderActions={(provider) => (
-          <ProviderActions
-            provider={provider}
-            onOpenSuspendModal={handleOpenSuspendModal}
-            onOpenReactivateModal={handleOpenReactivateModal}
-            onOpenKycModal={handleOpenKycModal}
-            onViewDetails={handleViewDetails}
-          />
-        )}
+        onViewDetails={handleViewDetails}
+        onOpenSuspendModal={handleOpenSuspendModal}
+        onOpenReactivateModal={handleOpenReactivateModal}
+        onOpenKycModal={handleOpenKycModal}
       />
 
       {/* Right-Side Provider Details Drawer */}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AwoLoader } from './AwoLoader';
 
 export interface DetailsDrawerProps {
@@ -252,8 +253,6 @@ export const DetailsDrawer: DetailsDrawerComponent = ({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
-
   /** Resolves footer: custom footer -> smart default close button -> null */
   const renderedFooter =
     footer !== undefined ? (
@@ -271,92 +270,106 @@ export const DetailsDrawer: DetailsDrawerComponent = ({
     ) : null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden animate-in fade-in duration-200">
-      {/* Backdrop Overlay */}
-      <div
-        onClick={onClose}
-        className="fixed inset-0 bg-slate-950/40 dark:bg-slate-950/70 backdrop-blur-xs transition-opacity"
-        aria-hidden="true"
-      />
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop Overlay */}
+          <motion.div
+            key="drawer-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            onClick={onClose}
+            className="fixed inset-0 bg-slate-950/40 dark:bg-slate-950/70 backdrop-blur-xs cursor-pointer"
+            aria-hidden="true"
+          />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        {/* Slide-over Panel */}
-        <div
-          className={`w-screen ${maxWidthClassName} bg-slate-50 dark:bg-slate-950 shadow-2xl flex flex-col border-l border-slate-200 dark:border-slate-800 transform transition-transform duration-300 ease-in-out`}
-        >
-          {/* Drawer Header */}
-          <div className="px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
-            <div className="flex items-center space-x-3 min-w-0">
-              {icon && <div className="shrink-0">{icon}</div>}
-              <div className="min-w-0">
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
-                  {title}
-                </h2>
-                {subtitle && (
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium truncate">
-                    {subtitle}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-2 shrink-0">
-              {headerAction}
-              <button
-                onClick={onClose}
-                type="button"
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                title="Close panel"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Drawer Body (Scrollable) */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            {/* Loading State with AwoLoader */}
-            {isLoading && (
-              <div className="py-24 flex flex-col items-center justify-center">
-                <AwoLoader size="sm" message={loadingMessage} />
-              </div>
-            )}
-
-            {/* Error State */}
-            {!isLoading && isError && (
-              <div className="py-16 px-6 flex flex-col items-center justify-center text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-                <AlertCircle className="w-10 h-10 text-rose-500" />
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                    Unable to load details
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    {errorMessage || 'An error occurred while fetching details from the server.'}
-                  </p>
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-none">
+            {/* Slide-over Panel */}
+            <motion.div
+              key="drawer-panel"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 32, stiffness: 350, mass: 0.8 }}
+              className={`w-screen ${maxWidthClassName} bg-slate-50 dark:bg-slate-950 shadow-2xl flex flex-col border-l border-slate-200 dark:border-slate-800 pointer-events-auto`}
+            >
+              {/* Drawer Header */}
+              <div className="px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+                <div className="flex items-center space-x-3 min-w-0">
+                  {icon && <div className="shrink-0">{icon}</div>}
+                  <div className="min-w-0">
+                    <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
+                      {title}
+                    </h2>
+                    {subtitle && (
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium truncate">
+                        {subtitle}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-4 py-2 bg-slate-900 dark:bg-slate-800 text-white text-xs font-semibold rounded-xl hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-                >
-                  Close Panel
-                </button>
+
+                <div className="flex items-center space-x-2 shrink-0">
+                  {headerAction}
+                  <button
+                    onClick={onClose}
+                    type="button"
+                    className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                    title="Close panel"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-            )}
 
-            {/* Content View */}
-            {!isLoading && !isError && children}
+              {/* Drawer Body (Scrollable) */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                {/* Loading State with AwoLoader */}
+                {isLoading && (
+                  <div className="py-24 flex flex-col items-center justify-center">
+                    <AwoLoader size="sm" message={loadingMessage} />
+                  </div>
+                )}
+
+                {/* Error State */}
+                {!isLoading && isError && (
+                  <div className="py-16 px-6 flex flex-col items-center justify-center text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
+                    <AlertCircle className="w-10 h-10 text-rose-500" />
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                        Unable to load details
+                      </h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        {errorMessage || 'An error occurred while fetching details from the server.'}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="px-4 py-2 bg-slate-900 dark:bg-slate-800 text-white text-xs font-semibold rounded-xl hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                    >
+                      Close Panel
+                    </button>
+                  </div>
+                )}
+
+                {/* Content View */}
+                {!isLoading && !isError && children}
+              </div>
+
+              {/* Optional Footer */}
+              {renderedFooter && (
+                <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
+                  {renderedFooter}
+                </div>
+              )}
+            </motion.div>
           </div>
-
-          {/* Optional Footer */}
-          {renderedFooter && (
-            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
-              {renderedFooter}
-            </div>
-          )}
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 

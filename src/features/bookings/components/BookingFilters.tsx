@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Filter, ChevronDown, Check } from 'lucide-react';
 
 interface BookingFiltersProps {
@@ -87,50 +88,58 @@ export const BookingFilters: React.FC<BookingFiltersProps> = ({
         </button>
 
         {/* Dropdown Menu */}
-        {isDropdownOpen && (
-          <div className="origin-top-right absolute right-0 mt-1.5 w-52 rounded-xl bg-white dark:bg-slate-900 shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-700/80 z-30 py-1.5 focus:outline-none divide-y divide-slate-100 dark:divide-slate-800 animate-in fade-in slide-in-from-top-1 duration-150">
-            <div className="px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              Filter by Status
-            </div>
-            <div className="py-1">
-              {STATUS_FILTERS.map((filter) => {
-                const isSelected = selectedStatus === filter.value;
-                return (
+        <AnimatePresence>
+          {isDropdownOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -6 }}
+              transition={{ duration: 0.15, ease: 'easeOut' }}
+              className="origin-top-right absolute right-0 mt-1.5 w-52 rounded-xl bg-white dark:bg-slate-900 shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-700/80 z-30 py-1.5 focus:outline-none divide-y divide-slate-100 dark:divide-slate-800"
+            >
+              <div className="px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Filter by Status
+              </div>
+              <div className="py-1">
+                {STATUS_FILTERS.map((filter) => {
+                  const isSelected = selectedStatus === filter.value;
+                  return (
+                    <button
+                      key={filter.value}
+                      type="button"
+                      onClick={() => {
+                        onStatusChange(filter.value);
+                        setIsDropdownOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-medium transition-colors cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold'
+                          : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      <span>{filter.label}</span>
+                      {isSelected && <Check className="w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 shrink-0" />}
+                    </button>
+                  );
+                })}
+              </div>
+              {isFiltered && (
+                <div className="p-1">
                   <button
-                    key={filter.value}
                     type="button"
                     onClick={() => {
-                      onStatusChange(filter.value);
+                      onStatusChange('all');
                       setIsDropdownOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-medium transition-colors cursor-pointer ${
-                      isSelected
-                        ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold'
-                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white'
-                    }`}
+                    className="w-full text-center py-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
                   >
-                    <span>{filter.label}</span>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 shrink-0" />}
+                    Reset Filter
                   </button>
-                );
-              })}
-            </div>
-            {isFiltered && (
-              <div className="p-1">
-                <button
-                  type="button"
-                  onClick={() => {
-                    onStatusChange('all');
-                    setIsDropdownOpen(false);
-                  }}
-                  className="w-full text-center py-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-                >
-                  Reset Filter
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
