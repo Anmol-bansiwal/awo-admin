@@ -26,8 +26,8 @@ import {
   Megaphone,
   Sliders,
   FileText,
-  Activity,
-  Banknote,
+  // Activity,
+  // Banknote,
 } from 'lucide-react';
 import { AwoLogo } from './AwoLoader';
 import { AdminProfileDropdown } from './AdminProfileDropdown';
