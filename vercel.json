@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://awo-api.mobileappdeveloperindia.com"
+      "source": "/api/:path*",
+      "destination": "https://awo-api.mobileappdeveloperindia.com/api/:path*"
     },
     {
       "source": "/(.*)",
