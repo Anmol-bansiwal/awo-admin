@@ -122,7 +122,7 @@ const NAV_GROUPS: NavGroupConfig[] = [
     items: [
       { to: '/analytics', label: 'Overview', icon: BarChart3 },
       { to: '/analytics/user-growth', label: 'User Growth', icon: Users },
-      //     { to: '/analytics/booking-trends', label: 'Booking Trends', icon: Calendar },
+          { to: '/analytics/booking-trends', label: 'Booking Trends', icon: Calendar },
       //     { to: '/analytics/revenue', label: 'Revenue Performance', icon: Banknote },
       //     { to: '/analytics/provider-performance', label: 'Provider Performance', icon: UserCheck },
       //     { to: '/analytics/engagement', label: 'Platform Engagement', icon: Activity },

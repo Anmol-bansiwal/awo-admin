@@ -1,4 +1,4 @@
-import { Filter, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 import type { UserListItem, UserTableProps } from './UserTable.types';
 import { SearchBar } from './SearchBar';
 import { DataTable, type ColumnDef } from './DataTable';
@@ -109,7 +109,7 @@ export function UserTable<T extends UserListItem>({
   }
 
   const headerControl = (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div className="flex items-center justify-between gap-4">
       {/* Search Input */}
       <div className="w-full sm:w-80">
         <SearchBar
@@ -118,16 +118,6 @@ export function UserTable<T extends UserListItem>({
           placeholder={searchPlaceholder}
         />
       </div>
-
-      {/* Filter Button */}
-      <button
-        type="button"
-        onClick={() => alert('Filter options')}
-        className="inline-flex items-center space-x-2 px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-2xs cursor-pointer"
-      >
-        <Filter className="w-4 h-4 text-slate-500 dark:text-slate-400" />
-        <span>Filter</span>
-      </button>
     </div>
   );
 

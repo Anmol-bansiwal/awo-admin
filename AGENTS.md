@@ -107,3 +107,30 @@ If there are multiple possible approaches, prefer the one with:
 ## 9. Avoid "Code for the Sake of Code"
 Do not assume that more code means a better implementation.
 A good implementation is not the one with the most files, functions, abstractions, or interfaces.
+
+---
+
+## Production Readiness Checklist ("Don't Skip These in Vibe Coded App")
+
+Ensure every web application feature meets this comprehensive checklist:
+
+1. **Privacy Policy**: Dedicated, accessible privacy policy page/modal outlining data usage.
+2. **Terms & Conditions**: Transparent legal and user usage terms.
+3. **Remove Frontend Secrets**: Never expose API secret keys, database credentials, or private keys in client code or version control. Use secure backend proxy or environment variables.
+4. **Enforce HTTPS**: Use secure protocol references and HTTPS redirection headers / CSP.
+5. **Cookie Consent Banner**: Informative, non-intrusive cookie and consent preferences banner.
+6. **Meta Titles & Descriptions**: Meaningful, SEO-optimized title tags and meta descriptions per route/page.
+7. **Social Preview Image**: Proper OpenGraph (`og:image`) and Twitter Card (`twitter:image`) meta tags.
+8. **Favicon**: High-resolution SVG and PNG favicon variants with proper manifest linking.
+9. **Sitemap & robots.txt**: Valid `sitemap.xml` and standard `robots.txt` in the public root.
+10. **Image Alt Text**: Comprehensive, accessible `alt` attributes on all images.
+11. **Image Compression**: Optimize and modern-format (WebP/AVIF/SVG) assets to minimize payload.
+12. **Page Load Speed Check**: Fast initial load, code splitting, lazy loading, and minimal bundle sizes.
+13. **Color Contrast Fixes**: WCAG AA/AAA compliant color contrast for text and interactive elements.
+14. **Mobile Responsiveness**: Fluid, mobile-first design that functions smoothly on all screen sizes.
+15. **Custom 404 Page**: Friendly, helpful 404 Not Found route with navigation back to safety.
+16. **Broken Link Fixes**: All navigational links and buttons must lead to valid routes or handlers.
+17. **Form Validation**: Strict client-side validation with clear, friendly error feedback before submission.
+18. **Spam Protection**: Client and API protection (honeypot fields, rate limiting, input sanitization).
+19. **Analytics Setup**: Privacy-conscious event and telemetry tracking (e.g., page views, core interactions).
+20. **Single Clear CTA**: Every primary page or flow must present one focused, prominent Call to Action.
