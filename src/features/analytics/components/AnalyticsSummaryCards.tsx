@@ -72,9 +72,15 @@ export const AnalyticsSummaryCards: React.FC<AnalyticsSummaryCardsProps> = ({
           >
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  {c.metric.title}
-                </span>
+                <div className="flex items-center space-x-1.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    {c.metric.title}
+                  </span>
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+                    title="Live Backend Data"
+                  />
+                </div>
                 <div className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   {c.metric.value}
                 </div>

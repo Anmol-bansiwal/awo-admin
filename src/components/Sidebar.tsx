@@ -120,12 +120,12 @@ const NAV_GROUPS: NavGroupConfig[] = [
     icon: BarChart3,
     matchPrefixes: ['/analytics'],
     items: [
-  //     { to: '/analytics', label: 'Overview', icon: BarChart3 },
-  //     { to: '/analytics/user-growth', label: 'User Growth', icon: Users },
-  //     { to: '/analytics/booking-trends', label: 'Booking Trends', icon: Calendar },
-  //     { to: '/analytics/revenue', label: 'Revenue Performance', icon: Banknote },
-  //     { to: '/analytics/provider-performance', label: 'Provider Performance', icon: UserCheck },
-  //     { to: '/analytics/engagement', label: 'Platform Engagement', icon: Activity },
+      { to: '/analytics', label: 'Overview', icon: BarChart3 },
+      { to: '/analytics/user-growth', label: 'User Growth', icon: Users },
+      //     { to: '/analytics/booking-trends', label: 'Booking Trends', icon: Calendar },
+      //     { to: '/analytics/revenue', label: 'Revenue Performance', icon: Banknote },
+      //     { to: '/analytics/provider-performance', label: 'Provider Performance', icon: UserCheck },
+      //     { to: '/analytics/engagement', label: 'Platform Engagement', icon: Activity },
     ],
   },
 ];
@@ -272,8 +272,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={({ isActive }) => {
                   const active = isActive || location.pathname.startsWith('/bookings');
                   return `flex items-center px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 group relative ${active
-                      ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold shadow-xs'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
+                    ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold shadow-xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                     }`;
                 }}
                 title={isCollapsed && !isOpen ? 'Booking Management' : undefined}
@@ -346,8 +346,8 @@ const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({
         type="button"
         onClick={onToggle}
         className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 group cursor-pointer ${isGroupActive
-            ? 'text-[#006E1C] dark:text-emerald-400 font-semibold bg-emerald-50/50 dark:bg-emerald-950/30'
-            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
+          ? 'text-[#006E1C] dark:text-emerald-400 font-semibold bg-emerald-50/50 dark:bg-emerald-950/30'
+          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
           }`}
         title={isCollapsed && !isOpen ? group.label : undefined}
       >
@@ -392,8 +392,8 @@ const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({
                       (item.matchPrefixes &&
                         item.matchPrefixes.some((p) => currentPath.startsWith(p)));
                     return `flex items-center px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150 ${active
-                        ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-bold'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
+                      ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-bold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                       }`;
                   }}
                 >

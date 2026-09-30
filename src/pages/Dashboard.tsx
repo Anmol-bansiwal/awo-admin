@@ -17,7 +17,8 @@ import {
 import { useCustomersQuery, CUSTOMERS_QUERY_KEY } from '../features/customers/hooks/useCustomers';
 import { useProvidersQuery, PROVIDERS_QUERY_KEY } from '../features/providers/hooks/useProviders';
 import { useBookingsQuery, BOOKINGS_QUERY_KEY } from '../features/bookings/hooks/useBookings';
-import { useBookingTrendsQuery, ANALYTICS_QUERY_KEYS } from '../features/analytics/hooks/useAnalytics';
+import { useBookingTrendsQuery, useRevenuePerformanceQuery, ANALYTICS_QUERY_KEYS } from '../features/analytics/hooks/useAnalytics';
+import { useEscrowSummaryQuery } from '../features/finance/hooks/useEscrow';
 import type { AnalyticsDateRange } from '../features/analytics/analytics.types';
 import type { Booking } from '../features/bookings/bookings.types';
 import { BookingStatus } from '../features/bookings/components/BookingStatus';
@@ -100,8 +101,8 @@ const MetricCard: React.FC<MetricCardProps> = ({
 /**
  * Main administrator dashboard page.
  * - Displays high-level platform KPI metrics (Total Users, Total Providers, Pending KYC).
- * - Live-connects to backend APIs for customer and provider counts.
- * - Provides quick navigation cards and simulated financial overviews.
+ * - Live-connects to backend APIs for customer, provider, booking, revenue, and escrow counts.
+ * - Provides quick navigation cards and financial overviews.
  */
 export const Dashboard: React.FC = () => {
   const [timeRange, setTimeRange] = useState('Last 30 Days');
@@ -124,6 +125,9 @@ export const Dashboard: React.FC = () => {
 
   const currentRangeKey = mapRangeToKey(timeRange);
   const bookingTrendsQuery = useBookingTrendsQuery(currentRangeKey);
+  const revenueQuery = useRevenuePerformanceQuery(currentRangeKey);
+  const escrowSummaryQuery = useEscrowSummaryQuery();
+
   const recentBookingsQuery = useBookingsQuery(1, 6);
   const recentBookings: Booking[] = Array.isArray(recentBookingsQuery.data?.data)
     ? recentBookingsQuery.data.data
@@ -145,6 +149,8 @@ export const Dashboard: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: PROVIDERS_QUERY_KEY }),
       queryClient.invalidateQueries({ queryKey: BOOKINGS_QUERY_KEY }),
       queryClient.invalidateQueries({ queryKey: ANALYTICS_QUERY_KEYS.bookingTrends(rangeKey) }),
+      queryClient.invalidateQueries({ queryKey: ANALYTICS_QUERY_KEYS.revenue(rangeKey) }),
+      queryClient.invalidateQueries({ queryKey: ['escrow-summary'] }),
     ]);
     setTimeout(() => {
       setIsRefreshing(false);
@@ -194,7 +200,22 @@ export const Dashboard: React.FC = () => {
       ? '...'
       : '0';
 
-  // Metrics: Live for Customers, Providers, Pending KYC & Bookings; static for unbacked metrics
+  const liveRevenue =
+    revenueQuery.data?.summary?.grossRevenue !== undefined
+      ? `€${revenueQuery.data.summary.grossRevenue.toLocaleString()}`
+      : revenueQuery.isLoading
+      ? '...'
+      : '€0';
+
+  const escrowTotal = escrowSummaryQuery.data?.total_escrow ?? (escrowSummaryQuery.data as any)?.total_held;
+  const liveEscrow =
+    escrowTotal !== undefined
+      ? `€${escrowTotal.toLocaleString()}`
+      : escrowSummaryQuery.isLoading
+      ? '...'
+      : '€0';
+
+  // Metrics: Live for Customers, Providers, Pending KYC, Bookings, Revenue, and Escrow
   const metrics: MetricCardProps[] = [
     {
       title: 'TOTAL USERS',
@@ -244,16 +265,18 @@ export const Dashboard: React.FC = () => {
     },
     {
       title: 'REVENUE',
-      value: '€45,230',
-      subtitle: 'This month',
+      value: liveRevenue,
+      subtitle: 'Volume to date',
+      isLive: true,
       icon: Banknote,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
       iconColor: 'text-[#006E1C] dark:text-emerald-400',
     },
     {
       title: 'IN ESCROW',
-      value: '€12,540',
+      value: liveEscrow,
       subtitle: 'Secured funds',
+      isLive: true,
       icon: Wallet,
       iconBgColor: 'bg-slate-100 dark:bg-slate-800',
       iconColor: 'text-slate-700 dark:text-slate-300',
@@ -272,6 +295,7 @@ export const Dashboard: React.FC = () => {
 
   const trendsData = bookingTrendsQuery.data;
   const timelineData = trendsData?.timeline || [];
+
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300 relative">
