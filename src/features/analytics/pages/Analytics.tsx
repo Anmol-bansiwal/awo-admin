@@ -27,7 +27,13 @@ import { ProviderPerformanceTable } from '../components/ProviderPerformanceTable
 import { PlatformEngagementChart } from '../components/PlatformEngagementChart';
 import type { AnalyticsDateRange } from '../analytics.types';
 
-type TabType = 'overview' | 'user-growth' | 'booking-trends' | 'revenue' | 'provider-performance' | 'engagement';
+type TabType =
+  | 'overview'
+  | 'user-growth'
+  | 'booking-trends'
+  | 'revenue'
+  | 'provider-performance'
+  | 'engagement';
 
 export const Analytics: React.FC = () => {
   const { tab } = useParams<{ tab?: string }>();
@@ -79,23 +85,26 @@ export const Analytics: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-200">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="space-y-1">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
-              <BarChart3 className="w-5 h-5" />
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50 shrink-0 shadow-2xs">
+              <BarChart3 className="w-5 h-5 stroke-[2.2]" />
             </div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Analytics & Reporting
-            </h1>
+            <div>
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Analytics & Reporting
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Platform operational metrics, growth velocity, and provider performance analysis.
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Platform operational metrics, growth velocity, and provider performance analysis.
-          </p>
         </div>
 
+        {/* Filter & Action Controls */}
         <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
           <AnalyticsDateFilter selectedRange={dateRange} onChange={setDateRange} />
 
@@ -103,16 +112,20 @@ export const Analytics: React.FC = () => {
             type="button"
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors shadow-2xs cursor-pointer disabled:opacity-50"
+            className="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-2xs cursor-pointer disabled:opacity-50 shrink-0"
             title="Refresh Analytics Data"
           >
-            <RefreshCw className={`w-4 h-4 text-[#006E1C] dark:text-emerald-400 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`w-4 h-4 text-[#006E1C] dark:text-emerald-400 ${
+                isRefreshing ? 'animate-spin' : ''
+              }`}
+            />
           </button>
         </div>
       </div>
 
-      {/* Tabs Navigation */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+      {/* Segmented Tabs Navigation */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none p-1.5 bg-slate-100/80 dark:bg-slate-800/60 rounded-2xl border border-slate-200/70 dark:border-slate-800">
         {TABS.map((t) => {
           const Icon = t.icon;
           const isActive = activeTab === t.id;
@@ -121,20 +134,24 @@ export const Analytics: React.FC = () => {
               key={t.id}
               type="button"
               onClick={() => handleTabChange(t.id as TabType)}
-              className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs whitespace-nowrap transition-all duration-150 cursor-pointer ${
                 isActive
-                  ? 'bg-[#006E1C] text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-800'
+                  ? 'bg-white dark:bg-slate-900 text-[#006E1C] dark:text-emerald-400 font-bold shadow-xs ring-1 ring-slate-200/80 dark:ring-slate-700/80'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium hover:bg-white/50 dark:hover:bg-slate-700/50'
               }`}
             >
-              <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} />
+              <Icon
+                className={`w-3.5 h-3.5 ${
+                  isActive ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500'
+                }`}
+              />
               <span>{t.label}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Summary Cards */}
+      {/* Summary KPI Cards */}
       <AnalyticsSummaryCards
         overview={overviewQuery.data}
         isLoading={overviewQuery.isLoading}
@@ -145,12 +162,21 @@ export const Analytics: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <UserGrowthChart report={userGrowthQuery.data} isLoading={userGrowthQuery.isLoading} />
-            <BookingTrendsChart report={bookingTrendsQuery.data} isLoading={bookingTrendsQuery.isLoading} />
+            <BookingTrendsChart
+              report={bookingTrendsQuery.data}
+              isLoading={bookingTrendsQuery.isLoading}
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <RevenuePerformanceChart report={revenueQuery.data} isLoading={revenueQuery.isLoading} />
-            <PlatformEngagementChart report={engagementQuery.data} isLoading={engagementQuery.isLoading} />
+            <RevenuePerformanceChart
+              report={revenueQuery.data}
+              isLoading={revenueQuery.isLoading}
+            />
+            <PlatformEngagementChart
+              report={engagementQuery.data}
+              isLoading={engagementQuery.isLoading}
+            />
           </div>
 
           <ProviderPerformanceTable
@@ -168,13 +194,19 @@ export const Analytics: React.FC = () => {
 
       {activeTab === 'booking-trends' && (
         <div className="space-y-6">
-          <BookingTrendsChart report={bookingTrendsQuery.data} isLoading={bookingTrendsQuery.isLoading} />
+          <BookingTrendsChart
+            report={bookingTrendsQuery.data}
+            isLoading={bookingTrendsQuery.isLoading}
+          />
         </div>
       )}
 
       {activeTab === 'revenue' && (
         <div className="space-y-6">
-          <RevenuePerformanceChart report={revenueQuery.data} isLoading={revenueQuery.isLoading} />
+          <RevenuePerformanceChart
+            report={revenueQuery.data}
+            isLoading={revenueQuery.isLoading}
+          />
         </div>
       )}
 
@@ -189,7 +221,10 @@ export const Analytics: React.FC = () => {
 
       {activeTab === 'engagement' && (
         <div className="space-y-6">
-          <PlatformEngagementChart report={engagementQuery.data} isLoading={engagementQuery.isLoading} />
+          <PlatformEngagementChart
+            report={engagementQuery.data}
+            isLoading={engagementQuery.isLoading}
+          />
         </div>
       )}
     </div>

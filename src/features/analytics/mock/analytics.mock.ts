@@ -15,7 +15,6 @@ export const getMockAnalyticsOverview = (range: AnalyticsDateRange): AnalyticsOv
     totalUsers: {
       title: 'Total Users',
       value: Math.round(12450 * multiplier).toLocaleString(),
-      rawNumber: Math.round(12450 * multiplier),
       changePercentage: 14.8,
       isPositive: true,
       subtitle: '+1,240 vs previous period',
@@ -23,7 +22,6 @@ export const getMockAnalyticsOverview = (range: AnalyticsDateRange): AnalyticsOv
     totalBookings: {
       title: 'Total Bookings',
       value: Math.round(2840 * multiplier).toLocaleString(),
-      rawNumber: Math.round(2840 * multiplier),
       changePercentage: 8.2,
       isPositive: true,
       subtitle: '+215 vs previous period',
@@ -31,7 +29,6 @@ export const getMockAnalyticsOverview = (range: AnalyticsDateRange): AnalyticsOv
     grossRevenue: {
       title: 'Gross Revenue',
       value: `€${Math.round(48320 * multiplier).toLocaleString()}`,
-      rawNumber: Math.round(48320 * multiplier),
       changePercentage: 12.4,
       isPositive: true,
       subtitle: 'Platform total booking volume',
@@ -39,7 +36,6 @@ export const getMockAnalyticsOverview = (range: AnalyticsDateRange): AnalyticsOv
     activeProviders: {
       title: 'Active Providers',
       value: Math.round(340 * (range === '7d' ? 0.8 : 1)).toLocaleString(),
-      rawNumber: Math.round(340 * (range === '7d' ? 0.8 : 1)),
       changePercentage: 5.1,
       isPositive: true,
       subtitle: 'Verified & active pros',
@@ -47,7 +43,6 @@ export const getMockAnalyticsOverview = (range: AnalyticsDateRange): AnalyticsOv
     engagementRate: {
       title: 'Platform Engagement',
       value: '78.4%',
-      rawNumber: 78.4,
       changePercentage: 3.2,
       isPositive: true,
       subtitle: 'Active users returning monthly',

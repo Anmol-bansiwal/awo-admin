@@ -36,8 +36,8 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
       header: 'Provider',
       render: (p) => (
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-100 dark:border-emerald-800/40">
-            {p.name.charAt(0)}
+          <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-100 dark:border-emerald-800/40">
+            {p.name.charAt(0).toUpperCase()}
           </div>
           <div className="flex flex-col min-w-0">
             <span className="font-semibold text-slate-900 dark:text-white text-xs truncate">
@@ -73,7 +73,7 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
         <div className="flex items-center justify-center space-x-2">
           <div className="w-16 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#006E1C] rounded-full"
+              className="h-full bg-[#006E1C] dark:bg-emerald-500 rounded-full"
               style={{ width: `${Math.min(100, p.completionRate)}%` }}
             />
           </div>
@@ -109,17 +109,17 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden space-y-4 p-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden space-y-4 p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-800/40">
-            <UserCheck className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-900/40 shadow-2xs">
+            <UserCheck className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
               Provider Performance Breakdown
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Job completions, fulfillment reliability, and service volume
             </p>
           </div>
@@ -140,13 +140,8 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
         columns={columns}
         keyExtractor={(p) => p.id}
         isLoading={isLoading}
-        loadingMessage="Loading provider performance records..."
         emptyTitle="No providers found"
-        emptyMessage={
-          search
-            ? `No provider records matched "${search}".`
-            : 'No provider performance metrics available.'
-        }
+        emptyMessage="Try adjusting your search criteria."
       />
     </div>
   );

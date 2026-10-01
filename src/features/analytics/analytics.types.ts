@@ -3,7 +3,6 @@ export type AnalyticsDateRange = '7d' | '30d' | '90d' | '12m';
 export interface AnalyticsSummaryMetric {
   title: string;
   value: string;
-  rawNumber: number;
   changePercentage: number;
   isPositive: boolean;
   subtitle: string;
