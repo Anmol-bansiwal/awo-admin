@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RotateCcw, Search, RefreshCw } from 'lucide-react';
+import { Search, RefreshCw } from 'lucide-react';
 import { useRefundsQuery } from '../hooks/useRefunds';
 import { RefundTable } from '../components/RefundTable';
 import { RefundDetailsDrawer } from '../components/RefundDetailsDrawer';
@@ -40,9 +40,8 @@ export const Refunds: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <RotateCcw className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-            <span>Refund Claims & Handling</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Refund Claims & Handling
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Review customer refund requests, cancellation reimbursements, and refund audit history.

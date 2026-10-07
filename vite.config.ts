@@ -16,11 +16,12 @@ export default defineConfig({
         }
       }
     }
+    
   },
   server: {
     proxy: {
       '/api': {
-        target: 'https://disown-antihero-secluded.ngrok-free.dev/',
+        target: 'https://awo-api.mobileappdeveloperindia.com',
         changeOrigin: true,
         secure: false,
         headers: {
@@ -30,3 +31,5 @@ export default defineConfig({
     },
   },
 });
+// live: https://awo-api.mobileappdeveloperindia.com
+// local:https://disown-antihero-secluded.ngrok-free.dev/

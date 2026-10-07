@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Search, RefreshCw } from 'lucide-react';
+import { Search, RefreshCw } from 'lucide-react';
 import { useTransactionsQuery } from '../hooks/useTransactions';
 import { TransactionTable } from '../components/TransactionTable';
 import { TransactionDetailsDrawer } from '../components/TransactionDetailsDrawer';
@@ -41,9 +41,8 @@ export const Transactions: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <CreditCard className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />
-            <span>Financial Transactions</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Financial Transactions
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Real-time audit log of customer payments, escrow holds, disbursements, and refunds.

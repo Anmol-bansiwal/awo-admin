@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import { Calendar, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import type { BookingTrendsReport } from '../analytics.types';
 
 interface BookingTrendsChartProps {
@@ -40,18 +40,13 @@ export const BookingTrendsChart: React.FC<BookingTrendsChartProps> = ({ report, 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 space-y-5 min-w-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/40 shadow-2xs">
-            <Calendar className="w-5 h-5 stroke-[2.2]" />
-          </div>
-          <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
-              Booking Activity & Volume
-            </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Completed, in-progress, and cancelled service mission trends
-            </p>
-          </div>
+        <div>
+          <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+            Booking Activity & Volume
+          </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Completed, in-progress, and cancelled service mission trends
+          </p>
         </div>
 
         <div className="flex items-center gap-4 text-xs font-semibold self-start sm:self-auto">

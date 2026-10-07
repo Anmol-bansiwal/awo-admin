@@ -39,23 +39,30 @@ export const ProviderKycStatusBadge: React.FC<{
     );
   }
 
-  const normalized = kycStatus.trim().toUpperCase();
+  const normalized = kycStatus.trim().toLowerCase();
 
-  let variant: StatusBadgeVariant = 'warning';
-  let label = 'KYC Pending';
+  let variant: StatusBadgeVariant = 'neutral';
+  let label = `KYC ${kycStatus}`;
 
-  if (normalized === 'APPROVED' || normalized === 'VERIFIED') {
+  // Requirement: Show a "Needs review" badge when kyc_status is in_review or pending_admin_approval
+  if (normalized === 'in_review' || normalized === 'pending_admin_approval') {
+    variant = 'warning';
+    label = 'Needs review';
+  } else if (normalized === 'approved' || normalized === 'verified') {
     variant = 'success';
     label = 'KYC Approved';
-  } else if (normalized === 'REJECTED') {
+  } else if (normalized === 'rejected') {
     variant = 'danger';
     label = 'KYC Rejected';
-  } else if (normalized === 'PENDING' || normalized === 'IN_REVIEW' || normalized === 'SUBMITTED') {
-    variant = 'warning';
-    label = 'KYC Pending';
-  } else {
+  } else if (normalized === 'declined') {
+    variant = 'danger';
+    label = 'KYC Declined';
+  } else if (normalized === 'in_progress') {
     variant = 'neutral';
-    label = `KYC ${kycStatus}`;
+    label = 'In Progress';
+  } else if (normalized === 'pending') {
+    variant = 'neutral';
+    label = 'Pending';
   }
 
   return (
@@ -69,4 +76,3 @@ export const ProviderKycStatusBadge: React.FC<{
     />
   );
 };
-

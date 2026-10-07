@@ -44,9 +44,8 @@ export const Escrow: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <ShieldCheck className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
-            <span>Escrow Vault Management</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Escrow Vault Management
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Track customer payments locked in escrow during active bookings until mission completion and release.

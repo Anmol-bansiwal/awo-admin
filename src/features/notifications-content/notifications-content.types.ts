@@ -30,13 +30,23 @@ export interface CreateAnnouncementPayload {
 
 export type UpdateAnnouncementPayload = Partial<CreateAnnouncementPayload>;
 
+export type NotificationAudience = 'both' | 'customers' | 'providers';
+
 export interface NotificationChannelToggle {
   id: string;
   label: string;
   description: string;
+  audience?: NotificationAudience;
+  // Channels commented out per requirement — keeping In-App only
+  // REMOVED — non-essential: uncomment to restore
+  /*
   email: boolean;
   sms: boolean;
   push: boolean;
+  */
+  email?: boolean;
+  sms?: boolean;
+  push?: boolean;
   in_app: boolean;
 }
 

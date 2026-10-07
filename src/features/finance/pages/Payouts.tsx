@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Search, RefreshCw } from 'lucide-react';
+import { Search, RefreshCw } from 'lucide-react';
 import { usePayoutsQuery } from '../hooks/usePayouts';
 import { PayoutTable } from '../components/PayoutTable';
 import { PayoutDetailsDrawer } from '../components/PayoutDetailsDrawer';
@@ -40,9 +40,8 @@ export const Payouts: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <ArrowUpRight className="w-7 h-7 text-purple-600 dark:text-purple-400" />
-            <span>Provider Payouts</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Provider Payouts
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Track and audit earned service payouts and bank disbursements to certified providers.

@@ -46,7 +46,16 @@ export const Providers: React.FC = () => {
     }, 4000);
   };
 
-  const { data, isLoading, isError, error } = useProvidersQuery(page, PAGE_SIZE);
+  const handleSearchChange = (q: string) => {
+    setSearchQuery(q);
+    setPage(1);
+  };
+
+  const { data, isLoading, isError, error } = useProvidersQuery(
+    page,
+    PAGE_SIZE,
+    searchQuery.trim() || undefined
+  );
   const suspendMutation = useSuspendProviderMutation();
   const reactivateMutation = useReactivateProviderMutation();
 
@@ -149,7 +158,7 @@ export const Providers: React.FC = () => {
         isError={isError}
         errorMessage={error?.message}
         searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
+        onSearchChange={handleSearchChange}
         searchPlaceholder="Search providers..."
         emptyMessage="No providers found."
         onViewDetails={handleViewDetails}

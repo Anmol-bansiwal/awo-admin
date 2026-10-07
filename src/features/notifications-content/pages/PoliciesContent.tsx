@@ -144,14 +144,9 @@ export const PoliciesContent: React.FC = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="space-y-1">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
-              <FileText className="w-5 h-5" />
-            </div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Policies & Static Content
-            </h1>
-          </div>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Policies & Static Content
+          </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Manage legal agreements, terms of service, cancellation policies, and company information.
           </p>

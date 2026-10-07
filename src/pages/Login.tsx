@@ -252,7 +252,10 @@ export const Login: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center py-3.5 px-4 rounded-lg text-white font-semibold bg-[#3BB54B] hover:bg-[#319A3F] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3BB54B] shadow-md shadow-[#3BB54B]/20 active:scale-[0.99] transition-all disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+              style={{
+                background: 'linear-gradient(91.44deg, #38B449 3.06%, #55DB54 50.81%, #184E20 98.55%)',
+              }}
+              className="w-full flex items-center justify-center py-3.5 px-4 rounded-lg text-white font-semibold hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#38B449] shadow-md shadow-[#38B449]/20 active:scale-[0.99] transition-all disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
             >
               {isSubmitting ? (
                 <span className="flex items-center space-x-2">

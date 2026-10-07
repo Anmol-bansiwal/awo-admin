@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import { Banknote, Percent } from 'lucide-react';
+import { Percent } from 'lucide-react';
 import { formatCurrency } from '../../../utils/formatters';
 import type { RevenuePerformanceReport } from '../analytics.types';
 
@@ -44,18 +44,13 @@ export const RevenuePerformanceChart: React.FC<RevenuePerformanceChartProps> = (
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 space-y-5 min-w-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/40 shadow-2xs">
-            <Banknote className="w-5 h-5 stroke-[2.2]" />
-          </div>
-          <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
-              Revenue & Commission Performance
-            </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Gross platform marketplace volume, commission retained, and provider payouts
-            </p>
-          </div>
+        <div>
+          <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+            Revenue & Commission Performance
+          </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Gross platform marketplace volume, commission retained, and provider payouts
+          </p>
         </div>
 
         <div className="flex items-center gap-4 text-xs font-semibold self-start sm:self-auto">

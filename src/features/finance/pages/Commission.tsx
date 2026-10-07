@@ -1,5 +1,5 @@
 import React from 'react';
-import { Percent, RefreshCw, AlertCircle } from 'lucide-react';
+import { RefreshCw, AlertCircle } from 'lucide-react';
 import { useCommissionConfigQuery, useUpdateCommissionMutation } from '../hooks/useCommission';
 import { CommissionSettings } from '../components/CommissionSettings';
 import { AwoLoader } from '../../../components/AwoLoader';
@@ -18,9 +18,8 @@ export const Commission: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <Percent className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />
-            <span>Commission Configurations</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Commission Configurations
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Configure default and category-specific platform service fees and revenue shares.

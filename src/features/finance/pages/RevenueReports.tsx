@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, RefreshCw, Calendar } from 'lucide-react';
+import { RefreshCw, Calendar } from 'lucide-react';
 import { useRevenueReportsQuery } from '../hooks/useRevenueReports';
 import { RevenueReportTable } from '../components/RevenueReportTable';
 import { formatMoney } from '../utils/financeFormatters';
@@ -17,9 +17,8 @@ export const RevenueReports: React.FC = () => {
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <BarChart3 className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />
-            <span>Platform Revenue Reports</span>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Platform Revenue Reports
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Financial reporting analytics, gross service values, commission earnings, and payouts.

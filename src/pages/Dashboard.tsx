@@ -43,6 +43,7 @@ interface MetricCardProps {
   icon: React.ElementType;
   iconBgColor: string;
   iconColor: string;
+  to?: string;
 }
 
 /**
@@ -58,45 +59,50 @@ const MetricCard: React.FC<MetricCardProps> = ({
   icon: Icon,
   iconBgColor,
   iconColor,
-}) => (
-  <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-    <div className="flex items-start justify-between">
-      <div className="space-y-1">
-        <div className="flex items-center space-x-1.5">
-          <span className="text-[11px] font-bold uppercase tracking-wider font-inter text-slate-500 dark:text-slate-400">
-            {title}
+  to,
+}) => {
+  const cardContent = (
+    <div className={`bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full ${to ? 'group cursor-pointer' : ''}`}>
+      <div className="flex items-start justify-between">
+        <div className="space-y-1">
+          <div className="flex items-center space-x-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider font-inter text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+              {title}
+            </span>
+            {isLive && (
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+                title="Live Backend Data"
+              />
+            )}
+          </div>
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            {value}
+          </div>
+        </div>
+        <div className={`p-3 rounded-xl ${iconBgColor} ${iconColor} shrink-0`}>
+          <Icon className="w-5 h-5 stroke-[2]" />
+        </div>
+      </div>
+      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center text-xs font-semibold">
+        {isPositive && (
+          <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1 font-semibold">
+            <TrendingUp className="w-3.5 h-3.5" />
+            {subtitle}
           </span>
-          {isLive && (
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-              title="Live Backend Data"
-            />
-          )}
-        </div>
-        <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          {value}
-        </div>
-      </div>
-      <div className={`p-3 rounded-xl ${iconBgColor} ${iconColor} shrink-0`}>
-        <Icon className="w-5 h-5 stroke-[2]" />
+        )}
+        {isWarning && (
+          <span className="text-rose-600 dark:text-rose-400 font-semibold">{subtitle}</span>
+        )}
+        {!isPositive && !isWarning && (
+          <span className="text-slate-500 dark:text-slate-400 font-medium">{subtitle}</span>
+        )}
       </div>
     </div>
-    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center text-xs font-semibold">
-      {isPositive && (
-        <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1 font-semibold">
-          <TrendingUp className="w-3.5 h-3.5" />
-          {subtitle}
-        </span>
-      )}
-      {isWarning && (
-        <span className="text-rose-600 dark:text-rose-400 font-semibold">{subtitle}</span>
-      )}
-      {!isPositive && !isWarning && (
-        <span className="text-slate-500 dark:text-slate-400 font-medium">{subtitle}</span>
-      )}
-    </div>
-  </div>
-);
+  );
+
+  return to ? <Link to={to} className="block h-full">{cardContent}</Link> : cardContent;
+};
 
 /**
  * Main administrator dashboard page.
@@ -111,8 +117,7 @@ export const Dashboard: React.FC = () => {
 
   // Live backend data hooks (real endpoints on server)
   const customersQuery = useCustomersQuery(1, 1);
-  const providersQuery = useProvidersQuery(1, 1);
-  const pendingKycQuery = useProvidersQuery(1, 1, 'pending');
+  const providersQuery = useProvidersQuery(1, 100);
   const activeBookingsQuery = useBookingsQuery(1, 1, 'PENDING');
   const completedBookingsQuery = useBookingsQuery(1, 1, 'COMPLETED');
   const rejectedBookingsQuery = useBookingsQuery(1, 1, 'REJECTED');
@@ -172,12 +177,21 @@ export const Dashboard: React.FC = () => {
       ? '...'
       : '0';
 
+  const providersList = Array.isArray(providersQuery.data?.data) ? providersQuery.data.data : [];
+  const pendingKycCount = providersList.filter((p) => {
+    const kyc = (p.kyc_status || p.provider?.kyc_status || '').toLowerCase();
+    return (
+      kyc === 'in_review' ||
+      kyc === 'pending_admin_approval' ||
+      kyc === 'pending' ||
+      kyc === 'in_progress'
+    );
+  }).length;
+
   const livePendingKyc =
-    pendingKycQuery.data?.metadata?.total !== undefined
-      ? pendingKycQuery.data.metadata.total.toLocaleString()
-      : pendingKycQuery.isLoading
+    providersQuery.isLoading
       ? '...'
-      : '0';
+      : pendingKycCount.toLocaleString();
 
   const liveActiveBookings =
     activeBookingsQuery.data?.metadata?.total !== undefined
@@ -226,6 +240,7 @@ export const Dashboard: React.FC = () => {
       icon: Users,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
       iconColor: 'text-[#38B449] dark:text-emerald-400',
+      to: '/customers',
     },
     {
       title: 'TOTAL PROVIDERS',
@@ -235,15 +250,19 @@ export const Dashboard: React.FC = () => {
       icon: UserCheck,
       iconBgColor: 'bg-slate-100 dark:bg-slate-800',
       iconColor: 'text-slate-700 dark:text-slate-300',
+      to: '/providers',
     },
     {
       title: 'PENDING KYC',
       value: livePendingKyc,
-      subtitle: 'Awaiting review',
+      subtitle: pendingKycCount > 0 ? `${pendingKycCount} needs review` : 'All reviewed',
+      isWarning: pendingKycCount > 0,
+      isPositive: pendingKycCount === 0 && !providersQuery.isLoading,
       isLive: true,
       icon: ClipboardList,
-      iconBgColor: 'bg-rose-50 dark:bg-rose-950/40',
-      iconColor: 'text-rose-600 dark:text-rose-400',
+      iconBgColor: pendingKycCount > 0 ? 'bg-amber-50 dark:bg-amber-950/40' : 'bg-emerald-50 dark:bg-emerald-950/40',
+      iconColor: pendingKycCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-[#38B449] dark:text-emerald-400',
+      to: '/providers',
     },
     {
       title: 'ACTIVE BOOKINGS',

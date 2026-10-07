@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { UserCheck } from 'lucide-react';
 import { DataTable, type ColumnDef } from '../../../components/DataTable';
 import { StatusBadge } from '../../../components/StatusBadge';
 import { SearchBar } from '../../../components/SearchBar';
@@ -111,18 +110,13 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden space-y-4 p-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-900/40 shadow-2xs">
-            <UserCheck className="w-5 h-5 stroke-[2.2]" />
-          </div>
-          <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
-              Provider Performance Breakdown
-            </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Job completions, fulfillment reliability, and service volume
-            </p>
-          </div>
+        <div>
+          <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+            Provider Performance Breakdown
+          </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Job completions, fulfillment reliability, and service volume
+          </p>
         </div>
 
         <div className="w-full sm:w-64">

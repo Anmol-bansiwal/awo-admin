@@ -74,20 +74,30 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
         id: 'booking_created',
         label: 'New Booking Created',
         description: 'Notify customer and provider when a new appointment request is submitted.',
+        audience: 'both',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: true,
         push: true,
+        */
         in_app: true,
       },
       {
         id: 'booking_confirmed',
         label: 'Booking Confirmed by Provider',
         description: 'Send confirmation receipt to the customer upon provider acceptance.',
+        audience: 'customers',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: true,
         push: true,
+        */
         in_app: true,
       },
+      // REMOVED — non-essential: uncomment to restore
+      /*
       {
         id: 'booking_reminder',
         label: 'Upcoming Job Reminder (24h & 2h)',
@@ -97,13 +107,18 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
         push: true,
         in_app: true,
       },
+      */
       {
         id: 'booking_completed',
         label: 'Job Completion & Feedback Request',
         description: 'Notify customer upon job completion to verify satisfaction and rate service.',
+        audience: 'both',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: false,
         push: true,
+        */
         in_app: true,
       },
     ],
@@ -117,11 +132,17 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
         id: 'payment_deposited',
         label: 'Escrow Payment Authorization',
         description: 'Notify customer and admin when payment is securely held in escrow.',
+        audience: 'both',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: false,
         push: true,
+        */
         in_app: true,
       },
+      // REMOVED — non-essential: uncomment to restore
+      /*
       {
         id: 'payout_released',
         label: 'Provider Payout Disbursement',
@@ -131,17 +152,24 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
         push: true,
         in_app: true,
       },
+      */
       {
         id: 'refund_processed',
         label: 'Refund Issue Confirmation',
         description: 'Notify customer when an approved refund has been credited back.',
+        audience: 'customers',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: true,
         push: false,
+        */
         in_app: true,
       },
     ],
   },
+  // REMOVED — non-essential: uncomment to restore
+  /*
   {
     id: 'provider_compliance',
     category: 'Provider Onboarding & Compliance',
@@ -167,6 +195,9 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
       },
     ],
   },
+  */
+  // REMOVED — non-essential: uncomment to restore
+  /*
   {
     id: 'customer_engagement',
     category: 'Customer Account & Support',
@@ -192,6 +223,7 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
       },
     ],
   },
+  */
   {
     id: 'system_admin',
     category: 'System & Admin Alerts',
@@ -201,18 +233,26 @@ export let MOCK_NOTIFICATION_GROUPS: NotificationGroup[] = [
         id: 'dispute_escalated_admin',
         label: 'Urgent Dispute Escalation',
         description: 'Broadcast high-priority notifications to admins when a case escalates.',
+        audience: 'both',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: true,
         push: true,
+        */
         in_app: true,
       },
       {
         id: 'system_downtime_alert',
         label: 'Critical System Incident Alerts',
         description: 'Immediate alert broadcast when an automated system health check fails.',
+        audience: 'both',
+        /* Channels commented out per requirement — keeping In-App only */
+        /* REMOVED — non-essential: uncomment to restore
         email: true,
         sms: true,
         push: true,
+        */
         in_app: true,
       },
     ],
