@@ -46,7 +46,7 @@ export const EscrowDetailsDrawer: React.FC<EscrowDetailsDrawerProps> = ({
             </h4>
             <div className="grid grid-cols-3 gap-2 text-center text-xs">
               <div className="p-2.5 bg-emerald-50 dark:bg-emerald-950/30 rounded-xl border border-emerald-200/80 dark:border-emerald-800/40">
-                <CheckCircle2 className="w-4 h-4 text-[#006E1C] dark:text-emerald-400 mx-auto mb-1" />
+                <CheckCircle2 className="w-4 h-4 text-[#38B449] dark:text-emerald-400 mx-auto mb-1" />
                 <span className="font-bold text-slate-900 dark:text-white text-[11px] block">1. Payment In</span>
                 <span className="text-[10px] text-slate-500 dark:text-slate-400">Locked in Escrow</span>
               </div>

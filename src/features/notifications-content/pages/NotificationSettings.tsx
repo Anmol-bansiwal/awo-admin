@@ -113,7 +113,7 @@ export const NotificationSettings: React.FC = () => {
         <button
           type="button"
           onClick={() => refetch()}
-          className="px-4 py-2 bg-[#006E1C] hover:bg-[#005716] text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+          className="px-4 py-2 bg-brand-gradient hover:opacity-95 text-white rounded-xl text-xs font-semibold transition-all cursor-pointer shadow-xs"
         >
           Try Again
         </button>
@@ -130,7 +130,7 @@ export const NotificationSettings: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="space-y-1">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
               <Bell className="w-5 h-5" />
             </div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
@@ -160,7 +160,7 @@ export const NotificationSettings: React.FC = () => {
             onClick={handleSave}
             disabled={!isDirty || updateMutation.isPending}
             className={`inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white shadow-sm transition-all cursor-pointer shrink-0 ${isDirty
-                ? 'bg-[#006E1C] hover:bg-[#005716] shadow-emerald-600/20'
+                ? 'bg-brand-gradient hover:opacity-95 shadow-emerald-600/20'
                 : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed opacity-70'
               }`}
           >
@@ -181,7 +181,7 @@ export const NotificationSettings: React.FC = () => {
             <div className="px-6 py-4 bg-slate-50/60 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <Sliders className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+                  <Sliders className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
                   {group.category}
                 </h3>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
@@ -232,7 +232,7 @@ export const NotificationSettings: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => handleToggle(group.id, item.id, key)}
-                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isChecked ? 'bg-[#006E1C]' : 'bg-slate-200 dark:bg-slate-700'
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isChecked ? 'bg-[#38B449]' : 'bg-slate-200 dark:bg-slate-700'
                               }`}
                             title={`Toggle ${label} notifications`}
                           >

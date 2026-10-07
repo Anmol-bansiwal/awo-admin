@@ -66,7 +66,7 @@ export const CaseDetailsDrawer: React.FC<CaseDetailsDrawerProps> = ({
           type="button"
           onClick={() => onApproveRefund(caseItem!)}
           disabled={isActionLoading}
-          className="px-4 py-2.5 rounded-xl bg-[#006E1C] hover:bg-[#005716] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+          className="px-4 py-2.5 rounded-xl bg-brand-gradient hover:opacity-95 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
         >
           <CheckCircle2 className="w-4 h-4" />
           <span>Approve Refund</span>

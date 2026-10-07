@@ -38,7 +38,7 @@ export const RefundTable: React.FC<RefundTableProps> = ({
           <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800/40">
             <RotateCcw className="w-3.5 h-3.5" />
           </div>
-          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors">
             {refund.refund_code || `#${refund.id.slice(0, 8)}`}
           </span>
         </div>
@@ -104,7 +104,7 @@ export const RefundTable: React.FC<RefundTableProps> = ({
     },
     {
       key: 'actions',
-      header: 'Action',
+      header: '',
       align: 'right',
       render: (refund) => (
         <button
@@ -113,7 +113,7 @@ export const RefundTable: React.FC<RefundTableProps> = ({
             e.stopPropagation();
             onViewDetails(refund);
           }}
-          className="p-1 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1 rounded-lg text-slate-400 hover:text-[#38B449] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="View Refund Details"
         >
           <Eye className="w-3.5 h-3.5" />

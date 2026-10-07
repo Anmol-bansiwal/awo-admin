@@ -51,7 +51,7 @@ export const BookingFilters: React.FC<BookingFiltersProps> = ({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search by ID, customer, provider, service..."
-          className="w-full pl-10 pr-9 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 dark:focus:ring-emerald-500/30 focus:border-[#006E1C] dark:focus:border-emerald-500 transition-all shadow-2xs"
+          className="w-full pl-10 pr-9 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 dark:focus:ring-emerald-500/30 focus:border-[#38B449] dark:focus:border-emerald-500 transition-all shadow-2xs"
         />
         {searchQuery && (
           <button
@@ -72,14 +72,14 @@ export const BookingFilters: React.FC<BookingFiltersProps> = ({
           onClick={() => setIsDropdownOpen((prev) => !prev)}
           className={`inline-flex items-center justify-between space-x-2 px-3.5 py-2.5 rounded-xl border text-xs font-semibold transition-all shadow-2xs cursor-pointer ${
             isFiltered
-              ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 border-[#006E1C]/40 dark:border-emerald-700/60 hover:bg-[#EAF7EC]/80 dark:hover:bg-emerald-950/60'
+              ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 border-[#38B449]/40 dark:border-emerald-700/60 hover:bg-[#EAF7EC]/80 dark:hover:bg-emerald-950/60'
               : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60'
           }`}
           title="Filter bookings by status"
           aria-expanded={isDropdownOpen}
         >
           <div className="flex items-center space-x-2">
-            <Filter className={`w-4 h-4 ${isFiltered ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
+            <Filter className={`w-4 h-4 ${isFiltered ? 'text-[#38B449] dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
             <span>
               {isFiltered ? `Status: ${currentFilter.label}` : 'Filter'}
             </span>
@@ -113,12 +113,12 @@ export const BookingFilters: React.FC<BookingFiltersProps> = ({
                       }}
                       className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-medium transition-colors cursor-pointer ${
                         isSelected
-                          ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold'
+                          ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 font-semibold'
                           : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <span>{filter.label}</span>
-                      {isSelected && <Check className="w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 shrink-0" />}
+                      {isSelected && <Check className="w-3.5 h-3.5 text-[#38B449] dark:text-emerald-400 shrink-0" />}
                     </button>
                   );
                 })}

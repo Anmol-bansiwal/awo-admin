@@ -91,7 +91,7 @@ export function CaseTable<T extends ComplaintCase>({
             {config.icon}
           </div>
           <div className="min-w-0">
-            <span className="font-bold text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+            <span className="font-bold text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors">
               {item.case_number}
             </span>
             {item.category ? (
@@ -267,7 +267,7 @@ export function CaseTable<T extends ComplaintCase>({
     },
     {
       key: 'actions',
-      header: 'Action',
+      header: '',
       align: 'right',
       render: (item) => (
         <button
@@ -276,7 +276,7 @@ export function CaseTable<T extends ComplaintCase>({
             e.stopPropagation();
             onViewDetails(item);
           }}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-[#38B449] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="Review Case"
         >
           <Eye className="w-4 h-4" />

@@ -188,7 +188,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40">
                 {isEdit ? <Edit3 className="w-5 h-5" /> : <FolderPlus className="w-5 h-5" />}
               </div>
               <div>
@@ -226,7 +226,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
                 {...register('name')}
                 className={`block w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border ${errors.name
                   ? 'border-rose-300 dark:border-rose-700 focus:ring-rose-500 focus:border-rose-500'
-                  : 'border-slate-300 dark:border-slate-700 focus:ring-[#006E1C] focus:border-[#006E1C]'
+                  : 'border-slate-300 dark:border-slate-700 focus:ring-[#38B449] focus:border-[#38B449]'
                   } rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-xs focus:outline-none focus:ring-2 transition-colors disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500`}
               />
               {errors.name && (
@@ -256,7 +256,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
                     }}
                   />
                 ) : (
-                  <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40">
                     <ImageIcon className="w-6 h-6" />
                   </div>
                 )}
@@ -277,7 +277,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
                     <span>{selectedFile ? 'Change Icon' : 'Upload Icon'}</span>
                   </label>
                   {selectedFile ? (
-                    <p className="text-[11px] text-[#006E1C] dark:text-emerald-400 font-semibold truncate mt-1">
+                    <p className="text-[11px] text-[#38B449] dark:text-emerald-400 font-semibold truncate mt-1">
                       {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
                     </p>
                   ) : (
@@ -306,7 +306,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
                   {...register('sort_order')}
                   className={`block w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border ${errors.sort_order
                     ? 'border-rose-300 dark:border-rose-700 focus:ring-rose-500 focus:border-rose-500'
-                    : 'border-slate-300 dark:border-slate-700 focus:ring-[#006E1C] focus:border-[#006E1C]'
+                    : 'border-slate-300 dark:border-slate-700 focus:ring-[#38B449] focus:border-[#38B449]'
                     } rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-xs focus:outline-none focus:ring-2 transition-colors disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500`}
                 />
                 {errors.sort_order && (
@@ -333,7 +333,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
                     {...register('is_active')}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#006E1C]"></div>
+                  <div className="w-9 h-5 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#38B449]"></div>
                 </label>
               </div>
             )}
@@ -351,7 +351,7 @@ export const CategoryCreateEditModal: React.FC<CategoryCreateEditModalProps> = (
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#006E1C] hover:bg-[#005716] shadow-sm shadow-emerald-600/20 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-brand-gradient hover:opacity-95 shadow-sm shadow-emerald-600/20 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
               >
                 {isLoading ? (
                   <>

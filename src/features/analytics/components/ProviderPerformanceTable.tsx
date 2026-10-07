@@ -36,7 +36,7 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
       header: 'Provider',
       render: (p) => (
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-100 dark:border-emerald-800/40">
+          <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-100 dark:border-emerald-800/40">
             {p.name.charAt(0).toUpperCase()}
           </div>
           <div className="flex flex-col min-w-0">
@@ -73,7 +73,7 @@ export const ProviderPerformanceTable: React.FC<ProviderPerformanceTableProps> =
         <div className="flex items-center justify-center space-x-2">
           <div className="w-16 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#006E1C] dark:bg-emerald-500 rounded-full"
+              className="h-full bg-[#38B449] dark:bg-emerald-500 rounded-full"
               style={{ width: `${Math.min(100, p.completionRate)}%` }}
             />
           </div>

@@ -109,9 +109,9 @@ export const PlatformEngagementChart: React.FC<PlatformEngagementChartProps> = (
               type="monotone"
               dataKey="activeUsers"
               name="Active Users"
-              stroke="#006E1C"
+              stroke="#38B449"
               strokeWidth={3}
-              dot={{ r: 3.5, fill: '#006E1C' }}
+              dot={{ r: 3.5, fill: '#38B449' }}
               activeDot={{ r: 6, stroke: '#fff', strokeWidth: 2 }}
             />
             <Line

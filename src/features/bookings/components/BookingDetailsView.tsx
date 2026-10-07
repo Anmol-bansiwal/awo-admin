@@ -169,7 +169,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
         <div className="pt-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-              <Activity className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+              <Activity className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
               <span>Booking Progress Lifecycle</span>
             </h3>
             {isCancelled && (
@@ -243,7 +243,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
         {/* CUSTOMER INFORMATION CARD */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-            <User className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+            <User className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Customer Information</h3>
           </div>
 
@@ -294,7 +294,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
         {/* PROVIDER INFORMATION CARD */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-            <UserCheck className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+            <UserCheck className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Provider Information</h3>
           </div>
 
@@ -354,7 +354,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
         {/* SERVICE INFORMATION CARD */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-            <Layers className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+            <Layers className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Service Details</h3>
           </div>
 
@@ -399,7 +399,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
           className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors"
         >
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-            <FileText className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+            <FileText className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Provider Activity Log</h3>
           </div>
 
@@ -409,7 +409,7 @@ export const BookingDetailsView: React.FC<BookingDetailsViewProps> = ({ booking 
                 key={activity.id || index}
                 className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-xs"
               >
-                <div className="w-2 h-2 rounded-full bg-[#006E1C] dark:bg-emerald-400 mt-1.5 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#38B449] dark:bg-emerald-400 mt-1.5 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-bold text-slate-800 dark:text-slate-200">{activity.action}</span>

@@ -225,7 +225,7 @@ export const Dashboard: React.FC = () => {
       isLive: true,
       icon: Users,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       title: 'TOTAL PROVIDERS',
@@ -252,7 +252,7 @@ export const Dashboard: React.FC = () => {
       isLive: true,
       icon: Calendar,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       title: 'COMPLETED BOOKINGS',
@@ -261,7 +261,7 @@ export const Dashboard: React.FC = () => {
       isLive: true,
       icon: CheckCircle,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       title: 'REVENUE',
@@ -270,7 +270,7 @@ export const Dashboard: React.FC = () => {
       isLive: true,
       icon: Banknote,
       iconBgColor: 'bg-emerald-50 dark:bg-emerald-950/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       title: 'IN ESCROW',
@@ -313,7 +313,7 @@ export const Dashboard: React.FC = () => {
           className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-2xs transition-all cursor-pointer"
         >
           <RefreshCw
-            className={`w-3.5 h-3.5 text-[#006E1C] dark:text-emerald-400 
+            className={`w-3.5 h-3.5 text-[#38B449] dark:text-emerald-400 
               ${isRefreshing ? 'animate-spin' : ''
             }`}
           />
@@ -348,7 +348,7 @@ export const Dashboard: React.FC = () => {
             <div className="flex items-center gap-3">
               {trendsData?.summary && (
                 <div className="hidden sm:flex items-center gap-2 text-xs">
-                  <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold border border-emerald-200/60 dark:border-emerald-800/40">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 font-semibold border border-emerald-200/60 dark:border-emerald-800/40">
                     {trendsData.summary.completionRate}% Done
                   </span>
                   <span className="text-slate-500 dark:text-slate-400 font-medium">
@@ -422,7 +422,7 @@ export const Dashboard: React.FC = () => {
                     iconType="circle"
                     wrapperStyle={{ fontSize: '11px', paddingBottom: '8px' }}
                   />
-                  <Bar dataKey="completed" name="Completed" fill="#006E1C" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="completed" name="Completed" fill="#38B449" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="active" name="Active / In Progress" fill="#3B82F6" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="cancelled" name="Cancelled" fill="#EF4444" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -442,7 +442,7 @@ export const Dashboard: React.FC = () => {
             </div>
             <Link
               to="/bookings"
-              className="text-xs font-bold text-[#006E1C] dark:text-emerald-400 hover:underline"
+              className="text-xs font-bold text-[#38B449] dark:text-emerald-400 hover:underline"
             >
               View All
             </Link>
@@ -497,7 +497,7 @@ export const Dashboard: React.FC = () => {
                         <td className="py-3 px-4">
                           <Link
                             to={`/bookings/${item.id}`}
-                            className="block font-semibold text-slate-900 dark:text-slate-100 text-xs hover:text-[#006E1C] dark:hover:text-emerald-400 transition-colors truncate max-w-[200px]"
+                            className="block font-semibold text-slate-900 dark:text-slate-100 text-xs hover:text-[#38B449] dark:hover:text-emerald-400 transition-colors truncate max-w-[200px]"
                           >
                             <span>{customerName}</span>
                             <span className="text-slate-400 mx-1.5">→</span>

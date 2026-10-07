@@ -107,7 +107,7 @@ export function DataTable<T>({
               <button
                 type="button"
                 onClick={onRetry}
-                className="px-4 py-2 bg-[#006E1C] hover:bg-[#005716] text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer"
+                className="px-4 py-2 bg-brand-gradient hover:opacity-95 text-white text-xs font-semibold rounded-xl transition-all cursor-pointer shadow-xs"
               >
                 Try Again
               </button>

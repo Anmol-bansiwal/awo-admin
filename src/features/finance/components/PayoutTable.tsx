@@ -38,7 +38,7 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
           <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-100 dark:border-purple-800/40">
             <ArrowUpRight className="w-3.5 h-3.5" />
           </div>
-          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+          <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate max-w-[120px] group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors">
             {payout.payout_code || `#${payout.id.slice(0, 8)}`}
           </span>
         </div>
@@ -105,7 +105,7 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
     },
     {
       key: 'actions',
-      header: 'Action',
+      header: '',
       align: 'right',
       render: (payout) => (
         <button
@@ -114,7 +114,7 @@ export const PayoutTable: React.FC<PayoutTableProps> = ({
             e.stopPropagation();
             onViewDetails(payout);
           }}
-          className="p-1 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1 rounded-lg text-slate-400 hover:text-[#38B449] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="View Payout Details"
         >
           <Eye className="w-3.5 h-3.5" />

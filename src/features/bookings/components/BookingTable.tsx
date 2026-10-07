@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, User, UserCheck } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import { DataTable, type ColumnDef } from '../../../components/DataTable';
 import type { Booking } from '../bookings.types';
 import { BookingStatus } from './BookingStatus';
@@ -73,7 +73,7 @@ export const BookingTable: React.FC<BookingTableProps> = ({
           booking.booking_code || booking.reference_number || `#${booking.id.slice(0, 8)}`;
         return (
           <div>
-            <div className="font-bold text-slate-900 dark:text-white group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <div className="font-bold text-slate-900 dark:text-white group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
               <span>{bookingCode}</span>
             </div>
             <div className="text-[11px] text-slate-400 dark:text-slate-500 font-medium flex items-center gap-1 mt-0.5">
@@ -90,28 +90,15 @@ export const BookingTable: React.FC<BookingTableProps> = ({
       render: (booking) => {
         const customerName = getCustomerName(booking);
         return (
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 font-semibold text-[11px] shrink-0 overflow-hidden">
-              {booking.customer?.avatar_url ? (
-                <img
-                  src={booking.customer.avatar_url}
-                  alt={customerName}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <User className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
-              )}
+          <div className="min-w-0">
+            <div className="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[140px]">
+              {customerName}
             </div>
-            <div className="min-w-0">
-              <div className="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[140px]">
-                {customerName}
+            {booking.customer?.phone && (
+              <div className="text-[11px] text-slate-400 dark:text-slate-500 truncate max-w-[140px]">
+                {booking.customer.phone}
               </div>
-              {booking.customer?.phone && (
-                <div className="text-[11px] text-slate-400 dark:text-slate-500 truncate max-w-[140px]">
-                  {booking.customer.phone}
-                </div>
-              )}
-            </div>
+            )}
           </div>
         );
       },
@@ -123,40 +110,21 @@ export const BookingTable: React.FC<BookingTableProps> = ({
         const providerName = getProviderName(booking);
         const isUnassigned = !booking.provider && !booking.provider_id;
         return (
-          <div className="flex items-center gap-2.5">
+          <div className="min-w-0">
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center font-semibold text-[11px] shrink-0 overflow-hidden ${
+              className={`font-semibold truncate max-w-[140px] ${
                 isUnassigned
-                  ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                  ? 'text-amber-700 dark:text-amber-400'
+                  : 'text-slate-800 dark:text-slate-200'
               }`}
             >
-              {booking.provider?.avatar_url ? (
-                <img
-                  src={booking.provider.avatar_url}
-                  alt={providerName}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <UserCheck className="w-3.5 h-3.5" />
-              )}
+              {providerName}
             </div>
-            <div className="min-w-0">
-              <div
-                className={`font-semibold truncate max-w-[140px] ${
-                  isUnassigned
-                    ? 'text-amber-700 dark:text-amber-400 italic'
-                    : 'text-slate-800 dark:text-slate-200'
-                }`}
-              >
-                {providerName}
+            {booking.provider?.category && (
+              <div className="text-[11px] text-slate-400 dark:text-slate-500 truncate max-w-[140px]">
+                {booking.provider.category}
               </div>
-              {booking.provider?.category && (
-                <div className="text-[11px] text-slate-400 dark:text-slate-500 truncate max-w-[140px]">
-                  {booking.provider.category}
-                </div>
-              )}
-            </div>
+            )}
           </div>
         );
       },
@@ -205,7 +173,7 @@ export const BookingTable: React.FC<BookingTableProps> = ({
     },
     {
       key: 'actions',
-      header: 'Actions',
+      header: '',
       align: 'right',
       render: (booking) => (
         <div onClick={(e) => e.stopPropagation()}>

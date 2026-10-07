@@ -174,18 +174,18 @@ export const ServiceCategories: React.FC = () => {
               <img
                 src={cat.image_url}
                 alt={cat.name}
-                className="w-10 h-10 rounded-xl object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 group-hover:ring-2 group-hover:ring-[#006E1C]/40 dark:group-hover:ring-emerald-500/40 transition-all"
+                className="w-10 h-10 rounded-xl object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 group-hover:ring-2 group-hover:ring-[#38B449]/40 dark:group-hover:ring-emerald-500/40 transition-all"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.display = 'none';
                 }}
               />
             ) : (
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40 group-hover:ring-2 group-hover:ring-[#006E1C]/40 dark:group-hover:ring-emerald-500/40 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-800/40 group-hover:ring-2 group-hover:ring-[#38B449]/40 dark:group-hover:ring-emerald-500/40 transition-all">
                 <Folder className="w-5 h-5" />
               </div>
             )}
             <div className="flex flex-col min-w-0">
-              <span className="font-bold text-slate-900 dark:text-white truncate text-xs group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+              <span className="font-bold text-slate-900 dark:text-white truncate text-xs group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors">
                 {cat.name}
               </span>
               <span className="text-[11px] text-slate-400 dark:text-slate-500 font-mono truncate">
@@ -229,7 +229,7 @@ export const ServiceCategories: React.FC = () => {
       },
       {
         key: 'actions',
-        header: 'Actions',
+        header: '',
         align: 'right',
         render: (cat) => (
           <div className="flex items-center justify-end space-x-1">
@@ -288,13 +288,13 @@ export const ServiceCategories: React.FC = () => {
             ? `No service categories matched "${searchQuery}".`
             : 'Create your first service category to get started.'
         }
-        emptyIcon={<Folder className="w-7 h-7 text-[#006E1C] dark:text-emerald-400" />}
+        emptyIcon={<Folder className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />}
         emptyAction={
           !searchQuery ? (
             <button
               type="button"
               onClick={handleOpenCreate}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-[#006E1C] hover:bg-[#005716] text-white rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-brand-gradient hover:opacity-95 text-white rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Add Category</span>
@@ -326,7 +326,7 @@ export const ServiceCategories: React.FC = () => {
               <button
                 type="button"
                 onClick={handleOpenCreate}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-[#006E1C] hover:bg-[#005716] text-white rounded-xl text-xs font-semibold shadow-sm shadow-emerald-600/20 transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-brand-gradient hover:opacity-95 text-white rounded-xl text-xs font-semibold shadow-sm shadow-emerald-600/20 transition-all cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Category</span>

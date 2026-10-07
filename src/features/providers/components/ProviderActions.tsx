@@ -44,7 +44,7 @@ export const ProviderActions: React.FC<ProviderActionsProps> = ({
                 {
                   key: 'check_kyc',
                   label: 'Verify KYC Documents',
-                  icon: <FileCheck className="w-3.5 h-3.5 text-[#006E1C]" />,
+                  icon: <FileCheck className="w-3.5 h-3.5 text-[#38B449]" />,
                   onClick: () => onOpenKycModal(provider),
                 },
               ]
@@ -62,7 +62,7 @@ export const ProviderActions: React.FC<ProviderActionsProps> = ({
             : {
                 key: 'reactivate',
                 label: 'Reactivate Provider',
-                icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#006E1C]" />,
+                icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#38B449]" />,
                 variant: 'success' as const,
                 onClick: () => onOpenReactivateModal(provider),
               },

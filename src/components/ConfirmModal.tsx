@@ -64,9 +64,9 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
               <div
                 className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                   isDanger
-                    ? 'bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/50'
+                    ? 'bg-[#BA1A1A40] text-[#BA1A1A] dark:text-rose-300 border border-[#BA1A1A]/30'
                     : isSuccess
-                    ? 'bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50'
+                    ? 'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] border border-[#38B449]/30'
                     : 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-900/50'
                 }`}
               >
@@ -110,9 +110,9 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
               disabled={isLoading}
               className={`px-4 py-2.5 rounded-xl text-xs font-semibold text-white shadow-sm transition-all cursor-pointer flex items-center space-x-2 ${
                 isDanger
-                  ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-600/20'
+                  ? 'bg-[#BA1A1A] hover:bg-[#a01616] shadow-rose-900/20'
                   : isSuccess
-                  ? 'bg-[#006E1C] hover:bg-[#005716] shadow-emerald-600/20'
+                  ? 'bg-brand-gradient hover:opacity-95 shadow-emerald-600/20'
                   : 'bg-amber-600 hover:bg-amber-700 shadow-amber-600/20'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >

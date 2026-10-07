@@ -49,7 +49,7 @@ export const CustomerActions: React.FC<CustomerActionsProps> = ({
             : {
                 key: 'reactivate',
                 label: 'Reactivate Account',
-                icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#006E1C]" />,
+                icon: <CheckCircle2 className="w-3.5 h-3.5 text-[#38B449]" />,
                 variant: 'success',
                 onClick: () => onOpenReactivateModal(customer),
               },

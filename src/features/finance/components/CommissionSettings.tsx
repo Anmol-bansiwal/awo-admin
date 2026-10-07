@@ -108,7 +108,7 @@ export const CommissionSettings: React.FC<CommissionSettingsProps> = ({
       {/* Global Default Commission Card */}
       <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
         <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 dark:border-slate-800">
-          <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-800/40 shrink-0">
+          <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-800/40 shrink-0">
             <Percent className="w-4 h-4" />
           </div>
           <div>
@@ -132,7 +132,7 @@ export const CommissionSettings: React.FC<CommissionSettingsProps> = ({
               value={defaultRate}
               onChange={(e) => setDefaultRate(e.target.value)}
               placeholder="0.00"
-              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all"
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all"
             />
             <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500 font-bold text-sm">
               %
@@ -180,7 +180,7 @@ export const CommissionSettings: React.FC<CommissionSettingsProps> = ({
                     value={cat.commission_percentage}
                     onChange={(e) => handleCategoryRateChange(cat.category_id, e.target.value)}
                     placeholder="0.00"
-                    className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all"
+                    className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all"
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400 dark:text-slate-500 font-bold text-xs">
                     %
@@ -198,7 +198,7 @@ export const CommissionSettings: React.FC<CommissionSettingsProps> = ({
           <button
             type="submit"
             disabled={isSaving}
-            className="px-6 py-2.5 bg-[#006E1C] hover:bg-[#005716] text-white font-bold text-xs rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="px-6 py-2.5 bg-brand-gradient hover:opacity-95 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Saving Configurations...' : 'Save Changes'}</span>

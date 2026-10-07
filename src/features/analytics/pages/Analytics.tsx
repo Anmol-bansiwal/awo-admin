@@ -90,7 +90,7 @@ export const Analytics: React.FC = () => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="space-y-1">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50 shrink-0 shadow-2xs">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50 shrink-0 shadow-2xs">
               <BarChart3 className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div>
@@ -116,7 +116,7 @@ export const Analytics: React.FC = () => {
             title="Refresh Analytics Data"
           >
             <RefreshCw
-              className={`w-4 h-4 text-[#006E1C] dark:text-emerald-400 ${
+              className={`w-4 h-4 text-[#38B449] dark:text-emerald-400 ${
                 isRefreshing ? 'animate-spin' : ''
               }`}
             />
@@ -136,13 +136,13 @@ export const Analytics: React.FC = () => {
               onClick={() => handleTabChange(t.id as TabType)}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs whitespace-nowrap transition-all duration-150 cursor-pointer ${
                 isActive
-                  ? 'bg-white dark:bg-slate-900 text-[#006E1C] dark:text-emerald-400 font-bold shadow-xs ring-1 ring-slate-200/80 dark:ring-slate-700/80'
+                  ? 'bg-white dark:bg-slate-900 text-[#38B449] dark:text-emerald-400 font-bold shadow-xs ring-1 ring-slate-200/80 dark:ring-slate-700/80'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium hover:bg-white/50 dark:hover:bg-slate-700/50'
               }`}
             >
               <Icon
                 className={`w-3.5 h-3.5 ${
-                  isActive ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500'
+                  isActive ? 'text-[#38B449] dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500'
                 }`}
               />
               <span>{t.label}</span>

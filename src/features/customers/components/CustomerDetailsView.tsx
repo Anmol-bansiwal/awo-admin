@@ -23,7 +23,7 @@ export const CustomerDetailsView: React.FC<CustomerDetailsViewProps> = ({
 
   const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
     customer.full_name || 'User'
-  )}&background=006E1C&color=fff`;
+  )}&background=38B449&color=fff`;
 
   const serviceLocations = customer.service_locations || [];
 
@@ -74,18 +74,18 @@ export const CustomerDetailsView: React.FC<CustomerDetailsViewProps> = ({
             <button
               type="button"
               onClick={() => onOpenSuspendModal(customer)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 font-semibold text-xs rounded-xl border border-rose-200 dark:border-rose-800/50 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:w-auto px-4 py-2.5 bg-[#BA1A1A40] hover:bg-[#BA1A1A]/30 text-[#BA1A1A] dark:text-rose-300 font-semibold text-xs rounded-xl border border-[#BA1A1A]/30 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
             >
-              <Ban className="w-4 h-4 text-rose-500" />
+              <Ban className="w-4 h-4 text-[#BA1A1A]" />
               <span>Suspend Account</span>
             </button>
           ) : (
             <button
               type="button"
               onClick={() => onOpenReactivateModal(customer)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#006E1C] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#006E1C]/20 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:w-auto px-4 py-2.5 bg-[#38B449]/10 dark:bg-[#38B449]/20 hover:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] font-semibold text-xs rounded-xl border border-[#38B449]/30 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-[#38B449] dark:text-[#55DB54]" />
               <span>Reactivate Account</span>
             </button>
           )}

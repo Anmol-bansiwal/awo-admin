@@ -54,7 +54,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({
       render: (item) => {
         const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
           item.full_name || 'User'
-        )}&background=006E1C&color=fff`;
+        )}&background=38B449&color=fff`;
 
         return (
           <button
@@ -71,14 +71,14 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({
               }}
               alt={item.full_name || 'User'}
               className={`w-10 h-10 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 ${handleItemClick
-                ? 'group-hover:ring-2 group-hover:ring-[#006E1C]/40 dark:group-hover:ring-emerald-500/40 transition-all'
+                ? 'group-hover:ring-2 group-hover:ring-[#38B449]/40 dark:group-hover:ring-emerald-500/40 transition-all'
                 : ''
                 }`}
             />
             <div className="flex flex-col min-w-0">
               <span
                 className={`font-bold text-slate-900 dark:text-white truncate text-sm ${handleItemClick
-                  ? 'group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 group-hover:underline transition-colors'
+                  ? 'group-hover:text-[#38B449] dark:group-hover:text-emerald-400 group-hover:underline transition-colors'
                   : ''
                   }`}
               >
@@ -113,7 +113,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({
     },
     {
       key: 'actions',
-      header: 'Actions',
+      header: '',
       align: 'right',
       render: (item) => (
         <ProviderActions

@@ -39,7 +39,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
             <CreditCard className="w-3.5 h-3.5" />
           </div>
           <div className="min-w-0 max-w-[150px]">
-            <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#006E1C] dark:group-hover:text-emerald-400 transition-colors">
+            <span className="font-bold text-xs text-slate-900 dark:text-white font-mono block truncate group-hover:text-[#38B449] dark:group-hover:text-emerald-400 transition-colors">
               {tx.transaction_code || tx.reference_number || `#${tx.id.slice(0, 8)}`}
             </span>
             {tx.booking_code && (
@@ -107,7 +107,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
     },
     {
       key: 'actions',
-      header: 'Action',
+      header: '',
       align: 'right',
       render: (tx) => (
         <button
@@ -116,7 +116,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
             e.stopPropagation();
             onViewDetails(tx);
           }}
-          className="p-1 rounded-lg text-slate-400 hover:text-[#006E1C] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
+          className="p-1 rounded-lg text-slate-400 hover:text-[#38B449] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
           title="View Details"
         >
           <Eye className="w-3.5 h-3.5" />

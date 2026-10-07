@@ -102,7 +102,7 @@ export const BookingTrendsChart: React.FC<BookingTrendsChartProps> = ({ report, 
               iconType="circle"
               wrapperStyle={{ fontSize: '11px', fontWeight: 600, paddingBottom: '12px' }}
             />
-            <Bar dataKey="completed" name="Completed" fill="#006E1C" radius={[5, 5, 0, 0]} />
+            <Bar dataKey="completed" name="Completed" fill="#38B449" radius={[5, 5, 0, 0]} />
             <Bar dataKey="active" name="Active / In Progress" fill="#2563eb" radius={[5, 5, 0, 0]} />
             <Bar dataKey="cancelled" name="Cancelled" fill="#f43f5e" radius={[5, 5, 0, 0]} />
           </BarChart>

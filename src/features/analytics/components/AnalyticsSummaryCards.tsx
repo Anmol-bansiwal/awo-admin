@@ -46,7 +46,7 @@ export const AnalyticsSummaryCards: React.FC<AnalyticsSummaryCardsProps> = ({
       icon: Users,
       iconBg: 'bg-emerald-50 dark:bg-emerald-950/50',
       iconBorder: 'border-emerald-100 dark:border-emerald-900/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       metric: overview.totalBookings,
@@ -60,7 +60,7 @@ export const AnalyticsSummaryCards: React.FC<AnalyticsSummaryCardsProps> = ({
       icon: Banknote,
       iconBg: 'bg-emerald-50 dark:bg-emerald-950/50',
       iconBorder: 'border-emerald-100 dark:border-emerald-900/40',
-      iconColor: 'text-[#006E1C] dark:text-emerald-400',
+      iconColor: 'text-[#38B449] dark:text-emerald-400',
     },
     {
       metric: overview.activeProviders,
@@ -121,7 +121,7 @@ export const AnalyticsSummaryCards: React.FC<AnalyticsSummaryCardsProps> = ({
                 <div
                   className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md font-semibold text-[11px] shrink-0 ${
                     c.metric.isPositive
-                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400'
                       : 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400'
                   }`}
                 >

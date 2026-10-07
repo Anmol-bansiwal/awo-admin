@@ -112,7 +112,7 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
         {/* Modal Header */}
         <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-[#006E1C]/20 dark:border-emerald-800/40">
+            <div className="w-9 h-9 rounded-xl bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-[#38B449]/20 dark:border-emerald-800/40">
               <FileCheck className="w-5 h-5" />
             </div>
             <div>
@@ -177,12 +177,12 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
           <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
               <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+                <FileText className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
                 <h3 className="text-xs font-bold text-slate-900 dark:text-white">
                   Identity Document: {profile?.identity_type?.name || 'Ghana Card'}
                 </h3>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 border border-[#006E1C]/20 dark:border-emerald-800/40">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 border border-[#38B449]/20 dark:border-emerald-800/40">
                 Identity Proof
               </span>
             </div>
@@ -253,10 +253,10 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
           <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+                <MapPin className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
                 <h3 className="text-xs font-bold text-slate-900 dark:text-white">Address Proof Document</h3>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 border border-[#006E1C]/20 dark:border-emerald-800/40">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 border border-[#38B449]/20 dark:border-emerald-800/40">
                 Address Proof
               </span>
             </div>
@@ -318,9 +318,9 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
                 {skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="px-3 py-1 rounded-xl bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 border border-[#006E1C]/20 dark:border-emerald-800/40 font-semibold text-xs flex items-center space-x-1.5"
+                    className="px-3 py-1 rounded-xl bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 border border-[#38B449]/20 dark:border-emerald-800/40 font-semibold text-xs flex items-center space-x-1.5"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#006E1C] dark:bg-emerald-400"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#38B449] dark:bg-emerald-400"></span>
                     <span>{skill}</span>
                   </div>
                 ))}
@@ -335,12 +335,12 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
             type="button"
             disabled={isPendingAction}
             onClick={handleReject}
-            className="px-5 py-2.5 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 disabled:opacity-50 text-rose-700 dark:text-rose-400 font-bold text-xs rounded-xl border border-rose-200 dark:border-rose-800/50 transition-colors flex items-center space-x-2 cursor-pointer shadow-2xs"
+            className="px-5 py-2.5 bg-[#BA1A1A40] hover:bg-[#BA1A1A]/30 disabled:opacity-50 text-[#BA1A1A] dark:text-rose-300 font-bold text-xs rounded-xl border border-[#BA1A1A]/30 transition-colors flex items-center space-x-2 cursor-pointer shadow-2xs"
           >
             {rejectMutation.isPending ? (
-              <Loader2 className="w-4 h-4 animate-spin text-rose-600" />
+              <Loader2 className="w-4 h-4 animate-spin text-[#BA1A1A]" />
             ) : (
-              <Ban className="w-4 h-4 text-rose-500" />
+              <Ban className="w-4 h-4 text-[#BA1A1A]" />
             )}
             <span>Reject KYC</span>
           </button>
@@ -349,7 +349,7 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
             type="button"
             disabled={isPendingAction}
             onClick={handleApprove}
-            className="px-5 py-2.5 bg-[#006E1C] hover:bg-[#005716] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-md transition-colors flex items-center space-x-2 cursor-pointer"
+            className="px-5 py-2.5 bg-brand-gradient hover:opacity-95 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center space-x-2 cursor-pointer"
           >
             {approveMutation.isPending ? (
               <Loader2 className="w-4 h-4 animate-spin text-white" />

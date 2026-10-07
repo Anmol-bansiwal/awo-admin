@@ -19,7 +19,7 @@ export const Commission: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <Percent className="w-7 h-7 text-[#006E1C] dark:text-emerald-400" />
+            <Percent className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />
             <span>Commission Configurations</span>
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -55,7 +55,7 @@ export const Commission: React.FC = () => {
           <button
             type="button"
             onClick={() => refetch()}
-            className="px-4 py-2 bg-[#006E1C] hover:bg-[#005716] text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer"
+            className="px-4 py-2 bg-brand-gradient hover:opacity-95 text-white text-xs font-semibold rounded-xl transition-all cursor-pointer shadow-xs"
           >
             Try Again
           </button>

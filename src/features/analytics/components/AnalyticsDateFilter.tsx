@@ -21,7 +21,7 @@ export const AnalyticsDateFilter: React.FC<AnalyticsDateFilterProps> = ({
   return (
     <div className="flex items-center gap-1 p-1 bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/60 rounded-xl shadow-2xs">
       <div className="hidden sm:flex items-center pl-2.5 pr-1.5 text-slate-500 dark:text-slate-400">
-        <Calendar className="w-3.5 h-3.5 mr-1.5 text-[#006E1C] dark:text-emerald-400" />
+        <Calendar className="w-3.5 h-3.5 mr-1.5 text-[#38B449] dark:text-emerald-400" />
         <span className="text-[11px] font-bold uppercase tracking-wider">Period:</span>
       </div>
       {RANGES.map((r) => {
@@ -33,7 +33,7 @@ export const AnalyticsDateFilter: React.FC<AnalyticsDateFilterProps> = ({
             onClick={() => onChange(r.value)}
             className={`px-3 py-1.5 rounded-lg text-xs transition-all duration-150 cursor-pointer ${
               isSelected
-                ? 'bg-white dark:bg-slate-900 text-[#006E1C] dark:text-emerald-400 shadow-xs ring-1 ring-slate-200/70 dark:ring-slate-700/80 font-bold'
+                ? 'bg-white dark:bg-slate-900 text-[#38B449] dark:text-emerald-400 shadow-xs ring-1 ring-slate-200/70 dark:ring-slate-700/80 font-bold'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium hover:bg-white/40 dark:hover:bg-slate-700/40'
             }`}
           >

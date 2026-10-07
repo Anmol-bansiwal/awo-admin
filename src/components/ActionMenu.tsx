@@ -76,7 +76,7 @@ export const ActionMenu: React.FC<ActionMenuProps> = ({
                 if (item.variant === 'danger') {
                   colorClasses = 'text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40';
                 } else if (item.variant === 'success') {
-                  colorClasses = 'text-[#006E1C] dark:text-emerald-400 hover:bg-[#EAF7EC] dark:hover:bg-emerald-950/40';
+                  colorClasses = 'text-[#38B449] dark:text-[#55DB54] hover:bg-[#38B449]/10 dark:hover:bg-[#38B449]/20';
                 }
 
                 return (

@@ -45,7 +45,7 @@ export const RevenuePerformanceChart: React.FC<RevenuePerformanceChartProps> = (
     <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all duration-200 space-y-5 min-w-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/40 shadow-2xs">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/40 shadow-2xs">
             <Banknote className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
@@ -77,8 +77,8 @@ export const RevenuePerformanceChart: React.FC<RevenuePerformanceChartProps> = (
           <AreaChart data={timeline} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
               <linearGradient id="colorGross" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#006E1C" stopOpacity={0.28} />
-                <stop offset="95%" stopColor="#006E1C" stopOpacity={0.0} />
+                <stop offset="5%" stopColor="#38B449" stopOpacity={0.28} />
+                <stop offset="95%" stopColor="#38B449" stopOpacity={0.0} />
               </linearGradient>
               <linearGradient id="colorCommission" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.28} />
@@ -121,7 +121,7 @@ export const RevenuePerformanceChart: React.FC<RevenuePerformanceChartProps> = (
               type="monotone"
               dataKey="grossRevenue"
               name="Gross Booking Value"
-              stroke="#006E1C"
+              stroke="#38B449"
               strokeWidth={2.5}
               fillOpacity={1}
               fill="url(#colorGross)"

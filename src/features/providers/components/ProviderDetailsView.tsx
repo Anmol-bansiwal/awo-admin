@@ -37,7 +37,7 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
 
   const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
     provider.full_name || 'Provider'
-  )}&background=006E1C&color=fff`;
+  )}&background=38B449&color=fff`;
 
   const formatYearsExperience = (val?: string | null): string => {
     if (!val) return '—';
@@ -112,9 +112,9 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
             <button
               type="button"
               onClick={() => onOpenKycModal(provider)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#006E1C] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#006E1C]/30 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/30 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
             >
-              <FileCheck className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+              <FileCheck className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
               <span>Check KYC</span>
             </button>
           )}
@@ -132,9 +132,9 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
             <button
               type="button"
               onClick={() => onOpenReactivateModal(provider)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#006E1C] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#006E1C]/20 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/20 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#006E1C] dark:text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
               <span>Reactivate Provider</span>
             </button>
           )}
@@ -249,7 +249,7 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
                   {skills.map((skill, index) => (
                     <span
                       key={index}
-                      className="px-2.5 py-1 rounded-lg bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 border border-[#006E1C]/20 dark:border-emerald-800/40 font-medium text-xs"
+                      className="px-2.5 py-1 rounded-lg bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 border border-[#38B449]/20 dark:border-emerald-800/40 font-medium text-xs"
                     >
                       {skill}
                     </span>

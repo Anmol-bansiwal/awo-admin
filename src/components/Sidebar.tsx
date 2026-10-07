@@ -230,7 +230,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={onCloseMobile}
               className={({ isActive }) =>
                 `flex items-center px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 group relative ${isActive
-                  ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold shadow-xs'
+                  ? 'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] font-semibold shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 }`
               }
@@ -239,11 +239,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {({ isActive }) => (
                 <>
                   {isActive && (
-                    <div className="absolute left-0 top-2 bottom-2 w-1 bg-[#006E1C] dark:bg-emerald-500 rounded-r-full" />
+                    <div className="absolute left-0 top-2 bottom-2 w-1 bg-[#38B449] rounded-r-full" />
                   )}
                   <LayoutDashboard
                     className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-105 ${isCollapsed && !isOpen ? 'mx-auto' : 'mr-3.5'
-                      } ${isActive ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
+                      } ${isActive ? 'text-[#38B449] dark:text-[#55DB54]' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
                   />
                   {(!isCollapsed || isOpen) && <span className="truncate">Dashboard</span>}
                 </>
@@ -272,7 +272,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={({ isActive }) => {
                   const active = isActive || location.pathname.startsWith('/bookings');
                   return `flex items-center px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 group relative ${active
-                    ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-semibold shadow-xs'
+                    ? 'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] font-semibold shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                     }`;
                 }}
@@ -283,11 +283,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   return (
                     <>
                       {active && (
-                        <div className="absolute left-0 top-2 bottom-2 w-1 bg-[#006E1C] dark:bg-emerald-500 rounded-r-full" />
+                        <div className="absolute left-0 top-2 bottom-2 w-1 bg-[#38B449] rounded-r-full" />
                       )}
                       <Calendar
                         className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-105 ${isCollapsed && !isOpen ? 'mx-auto' : 'mr-3.5'
-                          } ${active ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
+                          } ${active ? 'text-[#38B449] dark:text-[#55DB54]' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
                       />
                       {(!isCollapsed || isOpen) && <span className="truncate">Booking Management</span>}
                     </>
@@ -346,7 +346,7 @@ const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({
         type="button"
         onClick={onToggle}
         className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 group cursor-pointer ${isGroupActive
-          ? 'text-[#006E1C] dark:text-emerald-400 font-semibold bg-emerald-50/50 dark:bg-emerald-950/30'
+          ? 'text-[#38B449] dark:text-[#55DB54] font-semibold bg-[#38B449]/10 dark:bg-[#38B449]/20'
           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
           }`}
         title={isCollapsed && !isOpen ? group.label : undefined}
@@ -354,7 +354,7 @@ const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({
         <div className="flex items-center min-w-0">
           <GroupIcon
             className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-105 ${isCollapsed && !isOpen ? 'mx-auto' : 'mr-3.5'
-              } ${isGroupActive ? 'text-[#006E1C] dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
+              } ${isGroupActive ? 'text-[#38B449] dark:text-[#55DB54]' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200'}`}
           />
           {(!isCollapsed || isOpen) && <span className="truncate">{group.label}</span>}
         </div>
@@ -392,7 +392,7 @@ const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({
                       (item.matchPrefixes &&
                         item.matchPrefixes.some((p) => currentPath.startsWith(p)));
                     return `flex items-center px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150 ${active
-                      ? 'bg-[#EAF7EC] dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 font-bold'
+                      ? 'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] font-bold'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                       }`;
                   }}

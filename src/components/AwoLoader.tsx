@@ -16,8 +16,9 @@ export const AwoLogo: React.FC<AwoLogoProps> = ({
     >
       <defs>
         <linearGradient id="awoLogoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style={{ stopColor: '#46b94e' }} />
-          <stop offset="100%" style={{ stopColor: '#38a140' }} />
+          <stop offset="3%" style={{ stopColor: '#38B449' }} />
+          <stop offset="51%" style={{ stopColor: '#55DB54' }} />
+          <stop offset="99%" style={{ stopColor: '#184E20' }} />
         </linearGradient>
         <filter id="awoLogoGlow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="2" result="blur" />

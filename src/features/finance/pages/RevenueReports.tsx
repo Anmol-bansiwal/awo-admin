@@ -18,7 +18,7 @@ export const RevenueReports: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <BarChart3 className="w-7 h-7 text-[#006E1C] dark:text-emerald-400" />
+            <BarChart3 className="w-7 h-7 text-[#38B449] dark:text-emerald-400" />
             <span>Platform Revenue Reports</span>
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -53,7 +53,7 @@ export const RevenueReports: React.FC = () => {
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Total Commission Earned
             </div>
-            <div className="text-2xl font-extrabold text-[#006E1C] dark:text-emerald-400">
+            <div className="text-2xl font-extrabold text-[#38B449] dark:text-emerald-400">
               {formatMoney(summary.total_commission, summary.currency)}
             </div>
           </div>
@@ -93,7 +93,7 @@ export const RevenueReports: React.FC = () => {
               onClick={() => setPeriod(p)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                 period === p
-                  ? 'bg-white dark:bg-slate-900 text-[#006E1C] dark:text-emerald-400 shadow-2xs'
+                  ? 'bg-white dark:bg-slate-900 text-[#38B449] dark:text-emerald-400 shadow-2xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >

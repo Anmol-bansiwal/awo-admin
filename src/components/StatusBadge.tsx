@@ -29,8 +29,8 @@ const VARIANT_STYLES: Record<
 > = {
   success: {
     badge:
-      'bg-[#EAF7EC] dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 border-[#006E1C]/20 dark:border-emerald-800/40',
-    dot: 'bg-[#006E1C] dark:bg-emerald-400',
+      'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] border-[#38B449]/25 dark:border-[#38B449]/30',
+    dot: 'bg-[#38B449]',
   },
   warning: {
     badge:
@@ -39,8 +39,8 @@ const VARIANT_STYLES: Record<
   },
   danger: {
     badge:
-      'bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-400 border-rose-200/80 dark:border-rose-800/40',
-    dot: 'bg-rose-500',
+      'bg-[#BA1A1A40] text-[#BA1A1A] dark:text-rose-300 border-[#BA1A1A]/30',
+    dot: 'bg-[#BA1A1A]',
   },
   info: {
     badge:

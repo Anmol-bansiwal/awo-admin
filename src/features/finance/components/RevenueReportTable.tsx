@@ -34,7 +34,7 @@ export const RevenueReportTable: React.FC<RevenueReportTableProps> = ({
     {
       key: 'platform_commission',
       header: 'Platform Commission',
-      className: 'font-bold text-xs text-[#006E1C] dark:text-emerald-400 whitespace-nowrap',
+      className: 'font-bold text-xs text-[#38B449] dark:text-emerald-400 whitespace-nowrap',
       render: (p) => formatMoney(p.platform_commission, p.currency),
     },
     {

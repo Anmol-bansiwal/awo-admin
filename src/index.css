@@ -6,15 +6,23 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-inter: 'Inter', sans-serif;
 
-  --color-brand: #006E1C;
-  --color-brand-primary: #3BB54B;
-  --color-brand-hover: #005313;
-  --color-brand-light: #EAF7EC;
-  --color-brand-dark: #00440E;
+  --color-brand: #38B449;
+  --color-brand-primary: #38B449;
+  --color-brand-hover: #2e963c;
+  --color-brand-light: #effaf1;
+  --color-brand-dark: #184E20;
+
+  --color-danger-base: #BA1A1A;
+  --color-danger-tint: #BA1A1A40;
 
   --color-surface-dim: #D9DADB;
   --color-surface-container: #F8F9FA;
   --color-surface-card: #FFFFFF;
+}
+
+/* Brand Gradient Utility */
+.bg-brand-gradient {
+  background: linear-gradient(91.44deg, #38B449 3.06%, #55DB54 50.81%, #184E20 98.55%);
 }
 
 html {

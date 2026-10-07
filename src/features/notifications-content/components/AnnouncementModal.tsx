@@ -100,7 +100,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50">
                 <Megaphone className="w-5 h-5" />
               </div>
               <div>
@@ -141,7 +141,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Scheduled Platform Maintenance Notice"
-                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all"
+                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all"
                 disabled={isLoading}
               />
             </div>
@@ -156,7 +156,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
                 <select
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value as AnnouncementAudience)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all cursor-pointer"
                   disabled={isLoading}
                 >
                   <option value="ALL">All Users (Public)</option>
@@ -173,7 +173,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as AnnouncementStatus)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all cursor-pointer"
                   disabled={isLoading}
                 >
                   <option value="PUBLISHED">Published (Live)</option>
@@ -193,7 +193,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write the full announcement message here..."
-                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#006E1C]/20 focus:border-[#006E1C] transition-all resize-y"
+                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all resize-y"
                 disabled={isLoading}
               />
             </div>
@@ -211,7 +211,7 @@ export const AnnouncementModal: React.FC<AnnouncementModalProps> = ({
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#006E1C] hover:bg-[#005716] shadow-sm shadow-emerald-600/20 transition-all cursor-pointer flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-brand-gradient hover:opacity-95 shadow-sm shadow-emerald-600/20 transition-all cursor-pointer flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <span>Saving...</span>

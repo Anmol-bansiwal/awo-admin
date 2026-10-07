@@ -20,7 +20,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://awo-api.mobileappdeveloperindia.com',
+        target: 'https://disown-antihero-secluded.ngrok-free.dev/',
         changeOrigin: true,
         secure: false,
         headers: {

@@ -30,7 +30,7 @@ export const CategoryDetailsDrawer: React.FC<CategoryDetailsDrawerProps> = ({
       title="Category Details"
       subtitle="Service catalog category specifications"
       icon={
-        <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#006E1C] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-800/40 shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-[#38B449] dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-800/40 shrink-0">
           <Folder className="w-5 h-5" />
         </div>
       }
