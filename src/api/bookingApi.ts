@@ -99,6 +99,3 @@ export const bookingApi = {
     });
   },
 };
-
-export const bookingService = bookingApi;
-export const bookingsApi = bookingApi;

@@ -246,11 +246,11 @@ export const Announcements: React.FC = () => {
 
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
-        <div className="space-y-1">
+        <div>
           <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Platform Announcements
+            Announcements
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Publish system advisories, policy updates, and promotions to customers and providers.
           </p>
         </div>

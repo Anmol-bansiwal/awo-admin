@@ -5,7 +5,7 @@ const TOKEN_KEY = 'awo_admin_token';
 /**
  * Returns common HTTP headers, automatically attaching Bearer token and ngrok bypass headers.
  */
-export const getHeaders = (skipAuth = false): Record<string, string> => {
+const getHeaders = (skipAuth = false): Record<string, string> => {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': 'true',
@@ -20,7 +20,7 @@ export const getHeaders = (skipAuth = false): Record<string, string> => {
 /**
  * Parses and verifies HTTP response, throwing clean formatted Error on non-2xx status or HTML error pages.
  */
-export async function handleResponse<T>(response: Response): Promise<T> {
+async function handleResponse<T>(response: Response): Promise<T> {
   let data: any;
   const contentType = response.headers.get('content-type') || '';
 

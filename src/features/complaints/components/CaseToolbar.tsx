@@ -3,7 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import { SearchBar } from '../../../components/SearchBar';
 
 interface CasePageHeaderProps {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   title: string;
   subtitle: string;
   isFetching?: boolean;
@@ -11,7 +11,6 @@ interface CasePageHeaderProps {
 }
 
 export const CasePageHeader: React.FC<CasePageHeaderProps> = ({
-  icon,
   title,
   subtitle,
   isFetching = false,
@@ -20,9 +19,8 @@ export const CasePageHeader: React.FC<CasePageHeaderProps> = ({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-          {icon}
-          <span>{title}</span>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+          {title}
         </h1>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{subtitle}</p>
       </div>

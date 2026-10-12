@@ -106,15 +106,15 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-2.5">
+        {/* Action Buttons (Arranged Vertically) */}
+        <div className="w-full sm:w-auto flex flex-col items-stretch sm:items-end gap-2 shrink-0">
           {onOpenKycModal && (
             <button
               type="button"
               onClick={() => onOpenKycModal(provider)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/30 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:min-w-[155px] px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/30 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs whitespace-nowrap"
             >
-              <FileCheck className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
+              <FileCheck className="w-4 h-4 text-[#38B449] dark:text-emerald-400 shrink-0" />
               <span>Check KYC</span>
             </button>
           )}
@@ -123,18 +123,18 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
             <button
               type="button"
               onClick={() => onOpenSuspendModal(provider)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 font-semibold text-xs rounded-xl border border-rose-200 dark:border-rose-800/50 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:min-w-[155px] px-4 py-2.5 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 font-semibold text-xs rounded-xl border border-rose-200 dark:border-rose-800/50 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs whitespace-nowrap"
             >
-              <Ban className="w-4 h-4 text-rose-500" />
+              <Ban className="w-4 h-4 text-rose-500 shrink-0" />
               <span>Suspend Provider</span>
             </button>
           ) : (
             <button
               type="button"
               onClick={() => onOpenReactivateModal(provider)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/20 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs"
+              className="w-full sm:min-w-[155px] px-4 py-2.5 bg-[#EAF7EC] dark:bg-emerald-950/40 hover:bg-[#d8f3dc] dark:hover:bg-emerald-900/50 text-[#38B449] dark:text-emerald-400 font-semibold text-xs rounded-xl border border-[#38B449]/20 dark:border-emerald-800/40 transition-colors flex items-center justify-center space-x-2 cursor-pointer shadow-2xs whitespace-nowrap"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#38B449] dark:text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-[#38B449] dark:text-emerald-400 shrink-0" />
               <span>Reactivate Provider</span>
             </button>
           )}

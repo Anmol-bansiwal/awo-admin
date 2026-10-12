@@ -66,6 +66,3 @@ export const customerApi = {
     return response as Customer;
   },
 };
-
-export const customerService = customerApi;
-export const customersApi = customerApi;

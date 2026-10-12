@@ -176,6 +176,3 @@ export const providerApi = {
     return response as Provider;
   },
 };
-
-export const providerService = providerApi;
-export const providersApi = providerApi;

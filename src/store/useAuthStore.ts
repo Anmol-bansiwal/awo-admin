@@ -175,5 +175,4 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 // Initialize authentication state on application load
 useAuthStore.getState().initializeAuth();
 
-// Alias hook for backward compatibility
-export const useAuth = useAuthStore;
+

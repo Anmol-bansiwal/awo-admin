@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { RotateCcw } from 'lucide-react';
 import {
   useRefundRequestsQuery,
   useApproveRefundMutation,
@@ -67,7 +66,6 @@ export const RefundRequests: React.FC = () => {
   return (
     <div className="space-y-6">
       <CasePageHeader
-        icon={<RotateCcw className="w-7 h-7 text-blue-600 dark:text-blue-400" />}
         title="Complaint Refund Requests"
         subtitle="Review customer reimbursement claims, cancellation disputes, and compensation requests."
         isFetching={isFetching}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MessageSquareWarning } from 'lucide-react';
 import { useComplaintsQuery } from '../hooks/useComplaints';
 import { ComplaintTable } from '../components/CaseTable';
 import { CaseDetailsDrawer } from '../components/CaseDetailsDrawer';
@@ -27,7 +26,6 @@ export const Complaints: React.FC = () => {
   return (
     <div className="space-y-6">
       <CasePageHeader
-        icon={<MessageSquareWarning className="w-7 h-7 text-rose-600 dark:text-rose-400" />}
         title="Customer Complaints"
         subtitle="Review and investigate customer feedback, service delivery issues, and quality grievances."
         isFetching={isFetching}

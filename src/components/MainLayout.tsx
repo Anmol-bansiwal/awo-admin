@@ -21,8 +21,9 @@ export const MainLayout: React.FC = () => {
 
       {/* Main Content Area Offset by Desktop Sidebar Width */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-300 ${isDesktopCollapsed ? 'lg:pl-[80px]' : 'lg:pl-[280px]'
-          }`}
+        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
+          isDesktopCollapsed ? 'lg:pl-[80px]' : 'lg:pl-[280px]'
+        }`}
       >
         {/* Top Header Bar */}
         <Header

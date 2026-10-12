@@ -268,63 +268,66 @@ export let MOCK_POLICIES: Record<PolicySlug, PolicyContent> = {
     is_active: true,
     updated_at: '2026-09-01T10:00:00.000Z',
     updated_by: 'Legal Compliance',
-    content: `# AWO Platform Terms of Service
+    content: `<h2>1. Introduction</h2>
+<p>Welcome to AWO. By registering, accessing, or utilizing any services provided through the AWO marketplace, you agree to be bound by these Terms of Service.</p>
 
-**Effective Date:** September 1, 2026  
-**Last Revised:** September 1, 2026
+<h2>2. Eligibility & Account Responsibilities</h2>
+<ul>
+  <li>Users must be at least 18 years of age.</li>
+  <li>Account holders are strictly responsible for maintaining credential confidentiality.</li>
+  <li>All submitted personal and business information must be accurate, current, and complete.</li>
+</ul>
 
-## 1. Introduction
-Welcome to AWO ("Platform", "we", "us", or "our"). By registering, accessing, or utilizing any services provided through the AWO marketplace, you agree to be bound by these Terms of Service.
+<h2>3. Marketplace Services & Bookings</h2>
+<ul>
+  <li>AWO provides a verified marketplace platform connecting Customers with independent Service Providers.</li>
+  <li>Providers act as independent contractors and not employees or agents of AWO.</li>
+  <li>Contractual obligations for specific service execution exist directly between Customer and Provider.</li>
+</ul>
 
-## 2. Eligibility & Account Responsibilities
-- Users must be at least 18 years of age.
-- Account holders are strictly responsible for maintaining credential confidentiality.
-- All submitted personal and business information must be accurate, current, and complete.
+<h2>4. Escrow Payments & Protection</h2>
+<ul>
+  <li>Payments made by Customers are securely held in an escrow holding account until service verification.</li>
+  <li>Release of funds to Providers is governed by the AWO Milestone and Completion Policy.</li>
+</ul>
 
-## 3. Marketplace Services & Bookings
-- AWO provides a verified marketplace platform connecting Customers with independent Service Providers.
-- Providers act as independent contractors and not employees or agents of AWO.
-- Contractual obligations for specific service execution exist directly between Customer and Provider.
+<h2>5. Prohibited Conduct</h2>
+<ul>
+  <li>Off-platform payment solicitations are strictly prohibited and subject to immediate account termination.</li>
+  <li>Harassment, fraudulent documentation, or sub-contracting to unverified personnel is prohibited.</li>
+</ul>
 
-## 4. Escrow Payments & Protection
-- Payments made by Customers are securely held in an escrow holding account until service verification.
-- Release of funds to Providers is governed by the AWO Milestone and Completion Policy.
-
-## 5. Prohibited Conduct
-- Off-platform payment solicitations are strictly prohibited and subject to immediate account termination.
-- Harassment, fraudulent documentation, or sub-contracting to unverified personnel is prohibited.
-
-## 6. Limitation of Liability
-To the maximum extent permitted by applicable law, AWO shall not be liable for indirect, incidental, or consequential damages arising from service execution.`,
+<h2>6. Limitation of Liability</h2>
+<p>To the maximum extent permitted by applicable law, AWO shall not be liable for indirect, incidental, or consequential damages arising from service execution.</p>`,
   },
   'privacy-policy': {
     id: 'POL-002',
     slug: 'privacy-policy',
-    title: 'AWO Privacy & Data Protection Policy',
+    title: 'Privacy Policy',
     version: 'v2.1',
     is_active: true,
     updated_at: '2026-08-20T14:30:00.000Z',
     updated_by: 'Privacy Office',
-    content: `# AWO Privacy Policy
+    content: `<h2>1. Information We Collect</h2>
+<p>We collect information required to facilitate secure marketplace bookings and identity verification:</p>
+<ul>
+  <li><strong>Personal Details:</strong> Full name, contact email, phone number, physical address.</li>
+  <li><strong>Provider Credentials:</strong> Government ID, trade license certifications, insurance proof, bank accounts.</li>
+  <li><strong>Location Data:</strong> Real-time geolocation when enabled for on-demand dispatch matching.</li>
+</ul>
 
-**Effective Date:** August 20, 2026
+<h2>2. How We Use Data</h2>
+<ul>
+  <li>Facilitating booking discovery and direct customer-provider coordination.</li>
+  <li>Processing secure payments and verifying KYC compliance.</li>
+  <li>Preventing fraud, mitigating disputes, and enhancing user safety.</li>
+</ul>
 
-## 1. Information We Collect
-We collect information required to facilitate secure marketplace bookings and identity verification:
-- **Personal Details:** Full name, contact email, phone number, physical address.
-- **Provider Credentials:** Government ID, trade license certifications, insurance proof, bank accounts.
-- **Location Data:** Real-time geolocation when enabled for on-demand dispatch matching.
+<h2>3. Data Protection & Security</h2>
+<p>We utilize enterprise-grade encryption (TLS 1.3 in transit, AES-256 at rest) and comply with global privacy standards.</p>
 
-## 2. How We Use Data
-- Facilitating booking discovery and direct customer-provider coordination.
-- Processing secure payments and verifying KYC compliance.
-- Preventing fraud, mitigating disputes, and enhancing user safety.
-
-## 3. Data Protection & Security
-We utilize enterprise-grade encryption (TLS 1.3 in transit, AES-256 at rest) and comply with global privacy standards.
-
-## 4. Your Rights
-Users may request access, correction, or deletion of their personal information at any time via the Admin Support Helpdesk.`,
+<h2>4. Your Rights</h2>
+<p>Users may request access, correction, or deletion of their personal information at any time via the Admin Support Helpdesk.</p>`,
   },
   'cancellation-policy': {
     id: 'POL-003',
@@ -334,21 +337,21 @@ Users may request access, correction, or deletion of their personal information 
     is_active: true,
     updated_at: '2026-07-15T09:00:00.000Z',
     updated_by: 'Operations Team',
-    content: `# AWO Booking Cancellation Policy
+    content: `<h2>1. Customer Cancellations</h2>
+<ul>
+  <li><strong>Free Cancellation:</strong> Up to 12 hours before scheduled service appointment time.</li>
+  <li><strong>Late Cancellation (Within 12 hours):</strong> A standard 15% cancellation fee may be applied to compensate the scheduled provider for preparation and reserved slot.</li>
+  <li><strong>Provider En Route / On-Site:</strong> Up to 30% dispatch fee applies if cancelled once provider is on-site.</li>
+</ul>
 
-**Effective Date:** July 15, 2026
+<h2>2. Provider Cancellations</h2>
+<ul>
+  <li>Providers must give at least 8 hours notice for cancellations.</li>
+  <li>Unscheduled cancellations impact provider reliability score and dispatch ranking.</li>
+</ul>
 
-## 1. Customer Cancellations
-- **Free Cancellation:** Up to 12 hours before scheduled service appointment time.
-- **Late Cancellation (Within 12 hours):** A standard 15% cancellation fee may be applied to compensate the scheduled provider for preparation and reserved slot.
-- **Provider En Route / On-Site:** Up to 30% dispatch fee applies if cancelled once provider is on-site.
-
-## 2. Provider Cancellations
-- Providers must give at least 8 hours notice for cancellations.
-- Unscheduled cancellations impact provider reliability score and dispatch ranking.
-
-## 3. Emergency & Weather Exceptions
-In documented cases of severe weather emergencies or unforeseen platform outages, all cancellation fees are completely waived.`,
+<h2>3. Emergency & Weather Exceptions</h2>
+<p>In documented cases of severe weather emergencies or unforeseen platform outages, all cancellation fees are completely waived.</p>`,
   },
   'refund-policy': {
     id: 'POL-004',
@@ -358,22 +361,22 @@ In documented cases of severe weather emergencies or unforeseen platform outages
     is_active: true,
     updated_at: '2026-06-10T11:15:00.000Z',
     updated_by: 'Dispute Panel',
-    content: `# AWO Refund & Compensation Policy
+    content: `<h2>1. Refund Eligibility</h2>
+<p>Customers are entitled to claim full or partial refunds under the following circumstances:</p>
+<ul>
+  <li>Provider failed to show up without prior communication.</li>
+  <li>Work performed does not meet agreed quality standards, and provider refuses remediation.</li>
+  <li>Incomplete service delivery where partial milestones were unfulfilled.</li>
+</ul>
 
-**Effective Date:** June 10, 2026
+<h2>2. Claim Submission Window</h2>
+<p>Refund requests must be formally filed through the AWO Helpdesk within <strong>48 hours</strong> of job completion marking.</p>
 
-## 1. Refund Eligibility
-Customers are entitled to claim full or partial refunds under the following circumstances:
-- Provider failed to show up without prior communication.
-- Work performed does not meet agreed quality standards, and provider refuses remediation.
-- Incomplete service delivery where partial milestones were unfulfilled.
-
-## 2. Claim Submission Window
-Refund requests must be formally filed through the AWO Helpdesk within **48 hours** of job completion marking.
-
-## 3. Processing Timeline
-- Admin dispute investigation turnaround: 24 to 48 business hours.
-- Approved refund disbursement: 3 to 5 business days back to original payment method.`,
+<h2>3. Processing Timeline</h2>
+<ul>
+  <li>Admin dispute investigation turnaround: 24 to 48 business hours.</li>
+  <li>Approved refund disbursement: 3 to 5 business days back to original payment method.</li>
+</ul>`,
   },
   'about-us': {
     id: 'POL-005',
@@ -383,17 +386,17 @@ Refund requests must be formally filed through the AWO Helpdesk within **48 hour
     is_active: true,
     updated_at: '2026-05-01T08:00:00.000Z',
     updated_by: 'Editorial Team',
-    content: `# About AWO
+    content: `<p>AWO is a next-generation on-demand home and facility services platform dedicated to connecting households and commercial businesses with thoroughly vetted, top-tier service professionals.</p>
 
-AWO is a next-generation on-demand home and facility services platform dedicated to connecting households and commercial businesses with thoroughly vetted, top-tier service professionals.
+<h2>Our Mission</h2>
+<p>Empowering local service professionals with transparent digital tools and fair payouts while delivering reliable, high-quality, and escrow-protected services to everyday customers.</p>
 
-## Our Mission
-Empowering local service professionals with transparent digital tools and fair payouts while delivering reliable, high-quality, and escrow-protected services to everyday customers.
-
-## Key Pillars
-- **Trust & Verification:** Multi-point background checks, credential audits, and genuine customer reviews.
-- **Financial Protection:** Secure escrow holding ensures peace of mind for every transaction.
-- **Operational Excellence:** 24/7 dedicated support and transparent dispute resolution.`,
+<h2>Key Pillars</h2>
+<ul>
+  <li><strong>Trust & Verification:</strong> Multi-point background checks, credential audits, and genuine customer reviews.</li>
+  <li><strong>Financial Protection:</strong> Secure escrow holding ensures peace of mind for every transaction.</li>
+  <li><strong>Operational Excellence:</strong> 24/7 dedicated support and transparent dispute resolution.</li>
+</ul>`,
   },
 };
 

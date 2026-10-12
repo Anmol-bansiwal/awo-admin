@@ -57,38 +57,24 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({
         )}&background=38B449&color=fff`;
 
         return (
-          <button
-            type="button"
-            onClick={() => handleItemClick?.(item)}
-            disabled={!handleItemClick}
-            className={`flex items-center space-x-3 text-left w-full ${handleItemClick ? 'cursor-pointer group hover:opacity-90' : 'cursor-default'
-              }`}
-          >
+          <div className="flex items-center space-x-3 text-left w-full select-none">
             <img
               src={item.avatar_url || fallbackAvatar}
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = fallbackAvatar;
               }}
               alt={item.full_name || 'User'}
-              className={`w-10 h-10 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 ${handleItemClick
-                ? 'group-hover:ring-2 group-hover:ring-[#38B449]/40 dark:group-hover:ring-emerald-500/40 transition-all'
-                : ''
-                }`}
+              className="w-10 h-10 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 group-hover:ring-2 group-hover:ring-[#38B449]/40 dark:group-hover:ring-emerald-500/40 transition-all"
             />
             <div className="flex flex-col min-w-0">
-              <span
-                className={`font-bold text-slate-900 dark:text-white truncate text-sm ${handleItemClick
-                  ? 'group-hover:text-[#38B449] dark:group-hover:text-emerald-400 group-hover:underline transition-colors'
-                  : ''
-                  }`}
-              >
+              <span className="font-bold text-slate-900 dark:text-white truncate text-sm group-hover:text-[#38B449] dark:group-hover:text-emerald-400 group-hover:underline transition-colors">
                 {item.full_name || '—'}
               </span>
               <span className="text-xs text-slate-500 dark:text-slate-400 truncate font-normal">
                 {item.email || '—'}
               </span>
             </div>
-          </button>
+          </div>
         );
       },
     },
@@ -145,6 +131,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({
       data={providers}
       columns={columns}
       keyExtractor={(item) => item.id}
+      onRowClick={handleItemClick}
       headerControl={headerControl}
       isLoading={isLoading}
       loadingMessage="Loading providers directory..."

@@ -79,5 +79,3 @@ export const categoryApi = {
     return res as Category;
   },
 };
-
-export const categoryService = categoryApi;

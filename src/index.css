@@ -53,6 +53,27 @@ html.dark body {
   font-family: 'Inter', sans-serif;
 }
 
+.font-dm-sans {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.sidebar-module-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11.2px;
+  line-height: 120%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sidebar-submodule-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 11.2px;
+  line-height: 120%;
+  letter-spacing: 0.02em;
+}
+
 /* Modern Cross-Browser Scrollbar Styles (Universal + Root) */
 html,
 body,

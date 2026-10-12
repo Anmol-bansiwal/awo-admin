@@ -50,10 +50,17 @@ export const ActionMenu: React.FC<ActionMenuProps> = ({
   const alignmentClass = align === 'right' ? 'right-0 origin-top-right' : 'left-0 origin-top-left';
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div
+      className="relative inline-block text-left"
+      ref={dropdownRef}
+      onClick={(e) => e.stopPropagation()}
+    >
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen((prev) => !prev);
+        }}
         className={
           triggerClassName ||
           'p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer focus:outline-none'

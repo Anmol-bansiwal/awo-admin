@@ -1,112 +1,139 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   FileText,
-  Save,
-  Clock,
-  ShieldCheck,
-  Eye,
-  Edit3,
+  History,
+  Wallet,
+  Lock,
   RotateCcw,
+  Building2,
+  type LucideIcon,
 } from 'lucide-react';
 import { AwoLoader } from '../../../components/AwoLoader';
-import { StatusBadge } from '../../../components/StatusBadge';
 import { ToastAlert, type ToastMessage } from '../../../components/ToastAlert';
 import { formatDate } from '../../../utils/formatters';
 import {
   usePoliciesContentQuery,
   useUpdatePolicyMutation,
 } from '../hooks/usePoliciesContent';
-import type { PolicySlug } from '../notifications-content.types';
+import type { PolicyContent, PolicySlug } from '../notifications-content.types';
+import { PolicyEditModal } from '../components/PolicyEditModal';
+import { PolicyLivePreviewModal } from '../components/PolicyLivePreviewModal';
+import { AuditLogModal } from '../components/AuditLogModal';
+import { PolicyCard } from '../components/PolicyCard';
 
-const POLICY_TABS: { slug: PolicySlug; label: string; icon: string }[] = [
-  { slug: 'terms-of-service', label: 'Terms of Service', icon: '📜' },
-  { slug: 'privacy-policy', label: 'Privacy Policy', icon: '🔒' },
-  { slug: 'cancellation-policy', label: 'Cancellation Policy', icon: '⏱️' },
-  { slug: 'refund-policy', label: 'Refund Policy', icon: '💳' },
-  { slug: 'about-us', label: 'About Us', icon: '🏢' },
+interface PolicyCardConfig {
+  slug: PolicySlug;
+  title: string;
+  defaultVersion: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+const POLICY_CARDS_CONFIG: PolicyCardConfig[] = [
+  {
+    slug: 'terms-of-service',
+    title: 'Terms of Service',
+    defaultVersion: 'v2.4',
+    description:
+      'Governs customer agreements, dispute resolution procedures and marketplace liability limits.',
+    icon: FileText,
+  },
+  {
+    slug: 'cancellation-policy',
+    title: 'Provider Escrow & Cancellation Policy',
+    defaultVersion: 'v3.1',
+    description:
+      'Escrow retention timeline, 48-hour provider payout guarantees, and refund deductions.',
+    icon: Wallet,
+  },
+  {
+    slug: 'privacy-policy',
+    title: 'Privacy Policy',
+    defaultVersion: 'v2.0',
+    description:
+      'Data residency clauses, identity verification tokenization rules, and cookie opt-outs.',
+    icon: Lock,
+  },
+  {
+    slug: 'refund-policy',
+    title: 'Dispute Resolution & Customer Refund Policy',
+    defaultVersion: 'v1.5',
+    description:
+      'Customer claim submission windows, investigation turnaround, and compensation workflows.',
+    icon: RotateCcw,
+  },
+  {
+    slug: 'about-us',
+    title: 'About AWO Platform & Company Mission',
+    defaultVersion: 'v1.2',
+    description:
+      'Platform mission, trust pillars, corporate contact details, and company background.',
+    icon: Building2,
+  },
 ];
 
 export const PoliciesContent: React.FC = () => {
   const { data: policiesList, isLoading, isError, error, refetch } = usePoliciesContentQuery();
   const updateMutation = useUpdatePolicyMutation();
 
-  const [selectedSlug, setSelectedSlug] = useState<PolicySlug>('terms-of-service');
-  const [activeTitle, setActiveTitle] = useState<string>('');
-  const [activeVersion, setActiveVersion] = useState<string>('');
-  const [activeContent, setActiveContent] = useState<string>('');
-  const [isPreviewMode, setIsPreviewMode] = useState<boolean>(false);
-  const [isDirty, setIsDirty] = useState<boolean>(false);
+  // Active Modals State
+  const [editingPolicy, setEditingPolicy] = useState<PolicyContent | null>(null);
+  const [previewPolicy, setPreviewPolicy] = useState<PolicyContent | null>(null);
+  const [auditLogDocument, setAuditLogDocument] = useState<string | null>(null);
+  const [isAuditLogOpen, setIsAuditLogOpen] = useState(false);
+
   const [toast, setToast] = useState<ToastMessage | null>(null);
-
-  const currentPolicy = policiesList?.find((p) => p.slug === selectedSlug);
-
-  useEffect(() => {
-    if (currentPolicy) {
-      setActiveTitle(currentPolicy.title);
-      setActiveVersion(currentPolicy.version);
-      setActiveContent(currentPolicy.content);
-      setIsDirty(false);
-      setIsPreviewMode(false);
-    }
-  }, [currentPolicy, selectedSlug]);
 
   const showToast = (type: 'success' | 'error', text: string) => {
     setToast({ type, text });
     setTimeout(() => setToast(null), 4000);
   };
 
-  const handleSelectTab = (slug: PolicySlug) => {
-    if (isDirty) {
-      const confirmSwitch = window.confirm(
-        'You have unsaved changes. Are you sure you want to switch policies?'
-      );
-      if (!confirmSwitch) return;
-    }
-    setSelectedSlug(slug);
+  const handleOpenEdit = (policy: PolicyContent) => {
+    setEditingPolicy(policy);
   };
 
-  const handleSave = async () => {
-    if (!activeTitle.trim()) {
-      showToast('error', 'Policy title is required.');
-      return;
-    }
-    if (!activeContent.trim()) {
-      showToast('error', 'Policy content cannot be empty.');
-      return;
-    }
+  const handleOpenPreview = (policy: PolicyContent) => {
+    setPreviewPolicy(policy);
+  };
+
+
+  const handleOpenFullAuditLog = () => {
+    setAuditLogDocument(null);
+    setIsAuditLogOpen(true);
+  };
+
+  const handleSavePolicy = async (payload: {
+    title: string;
+    version: string;
+    content: string;
+  }) => {
+    if (!editingPolicy) return;
 
     try {
       await updateMutation.mutateAsync({
-        slug: selectedSlug,
+        slug: editingPolicy.slug,
         payload: {
-          title: activeTitle.trim(),
-          content: activeContent,
-          version: activeVersion.trim() || 'v1.0',
+          title: payload.title,
+          version: payload.version,
+          content: payload.content,
         },
       });
-      setIsDirty(false);
-      showToast('success', `${activeTitle} updated successfully.`);
+
+      showToast('success', `${payload.title} saved and published successfully.`);
+      setEditingPolicy(null);
     } catch (err) {
       showToast(
         'error',
-        err instanceof Error ? err.message : 'Failed to update policy content.'
+        err instanceof Error ? err.message : 'Failed to save and publish policy.'
       );
-    }
-  };
-
-  const handleReset = () => {
-    if (currentPolicy) {
-      setActiveTitle(currentPolicy.title);
-      setActiveVersion(currentPolicy.version);
-      setActiveContent(currentPolicy.content);
-      setIsDirty(false);
     }
   };
 
   if (isLoading) {
     return (
       <div className="py-24 flex flex-col items-center justify-center">
-        <AwoLoader size="lg" message="Loading policies and static content..." />
+        <AwoLoader size="lg" message="Loading policies and legal documents..." />
       </div>
     );
   }
@@ -119,7 +146,7 @@ export const PoliciesContent: React.FC = () => {
         </div>
         <div>
           <h3 className="text-base font-bold text-slate-900 dark:text-white">
-            Failed to Load Policies
+            Failed to Load Legal Documents
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm">
             {error instanceof Error ? error.message : 'An unexpected error occurred.'}
@@ -136,6 +163,11 @@ export const PoliciesContent: React.FC = () => {
     );
   }
 
+  // Find policies or fall back to default configs
+  const getPolicyBySlug = (slug: PolicySlug): PolicyContent | undefined => {
+    return policiesList?.find((p) => p.slug === slug);
+  };
+
   return (
     <div className="space-y-6">
       {/* Toast Alert */}
@@ -143,201 +175,83 @@ export const PoliciesContent: React.FC = () => {
 
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
-        <div className="space-y-1">
+        <div>
           <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
             Policies & Static Content
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Manage legal agreements, terms of service, cancellation policies, and company information.
-          </p>
         </div>
 
-        <div className="flex items-center space-x-2.5">
-          {isDirty && (
-            <button
-              type="button"
-              onClick={handleReset}
-              disabled={updateMutation.isPending}
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Discard</span>
-            </button>
-          )}
-
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={!isDirty || updateMutation.isPending}
-            className={`inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white shadow-sm transition-all cursor-pointer shrink-0 ${
-              isDirty
-                ? 'bg-brand-gradient hover:opacity-95 shadow-emerald-600/20'
-                : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed opacity-70'
-            }`}
-          >
-            <Save className="w-4 h-4" />
-            <span>{updateMutation.isPending ? 'Saving...' : 'Save Policy'}</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={handleOpenFullAuditLog}
+          className="inline-flex items-center space-x-2 px-3.5 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-2xs transition-colors cursor-pointer shrink-0"
+        >
+          <History className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+          <span>Full Audit Log</span>
+        </button>
       </div>
 
-      {/* Main Grid: Policy Navigation Tabs & Document Editor */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Left Navigation Sidebar */}
-        <div className="lg:col-span-1 space-y-2">
-          <div className="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-1">
-            <p className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-              Platform Documents
-            </p>
-            {POLICY_TABS.map((tab) => {
-              const isActive = selectedSlug === tab.slug;
-              return (
-                <button
-                  key={tab.slug}
-                  type="button"
-                  onClick={() => handleSelectTab(tab.slug)}
-                  className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-medium transition-all duration-150 cursor-pointer ${
-                    isActive
-                      ? 'bg-[#38B449]/10 dark:bg-[#38B449]/20 text-[#38B449] dark:text-[#55DB54] font-bold shadow-2xs'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60'
-                  }`}
-                >
-                  <div className="flex items-center space-x-2.5">
-                    <span>{tab.icon}</span>
-                    <span>{tab.label}</span>
-                  </div>
-                  {isActive && (
-                    <span className="w-2 h-2 rounded-full bg-[#38B449] dark:bg-emerald-500" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
+      {/* Main Grid: Policy Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Render Primary Policy Cards */}
+        {POLICY_CARDS_CONFIG.map((cfg) => {
+          const policy = getPolicyBySlug(cfg.slug);
+          const displayTitle = cfg.title;
+          const isPublished = policy?.is_active ?? true;
+          const updatedDate = policy?.updated_at
+            ? formatDate(policy.updated_at)
+            : '14 Oct 2024';
 
-          {/* Quick Info Box */}
-          <div className="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 text-[11px] text-slate-500 dark:text-slate-400 space-y-2">
-            <div className="flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-300">
-              <ShieldCheck className="w-4 h-4 text-[#38B449]" />
-              <span>Legal Compliance</span>
-            </div>
-            <p>
-              Updating platform policies immediately impacts customer agreements and provider onboarding terms.
-            </p>
-          </div>
-        </div>
-
-        {/* Right Editor Area */}
-        <div className="lg:col-span-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden flex flex-col">
-          {/* Document Meta Header */}
-          <div className="p-6 border-b border-slate-100 dark:border-slate-800 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="flex items-center space-x-3">
-                <StatusBadge
-                  label={currentPolicy?.version || 'v1.0'}
-                  variant="teal"
-                  size="sm"
-                  shape="pill"
-                />
-                <span className="text-xs font-mono text-slate-400">/{selectedSlug}</span>
-              </div>
-
-              {currentPolicy && (
-                <div className="flex items-center space-x-4 text-[11px] text-slate-400">
-                  <div className="flex items-center space-x-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>
-                      Updated: {formatDate(currentPolicy.updated_at)}
-                    </span>
-                  </div>
-                  {currentPolicy.updated_by && (
-                    <span>By: {currentPolicy.updated_by}</span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Document Title & Version Inputs */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="sm:col-span-2 space-y-1">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  Document Title
-                </label>
-                <input
-                  type="text"
-                  value={activeTitle}
-                  onChange={(e) => {
-                    setActiveTitle(e.target.value);
-                    setIsDirty(true);
-                  }}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all"
-                  placeholder="e.g. Terms of Service"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  Version
-                </label>
-                <input
-                  type="text"
-                  value={activeVersion}
-                  onChange={(e) => {
-                    setActiveVersion(e.target.value);
-                    setIsDirty(true);
-                  }}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all"
-                  placeholder="e.g. v2.4"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Mode Switcher Header */}
-          <div className="px-6 py-3 bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-              {isPreviewMode ? 'Document Live Preview' : 'Content Editor (Markdown Supported)'}
-            </span>
-
-            <button
-              type="button"
-              onClick={() => setIsPreviewMode((prev) => !prev)}
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/60 transition-colors cursor-pointer shadow-2xs"
-            >
-              {isPreviewMode ? (
-                <>
-                  <Edit3 className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Switch to Editor</span>
-                </>
-              ) : (
-                <>
-                  <Eye className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Live Preview</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          {/* Editor / Preview Content Body */}
-          <div className="p-6 flex-1 min-h-[420px]">
-            {isPreviewMode ? (
-              <div className="prose prose-sm dark:prose-invert max-w-none text-xs leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-wrap font-sans bg-slate-50/50 dark:bg-slate-800/30 p-6 rounded-xl border border-slate-100 dark:border-slate-800">
-                {activeContent}
-              </div>
-            ) : (
-              <textarea
-                value={activeContent}
-                onChange={(e) => {
-                  setActiveContent(e.target.value);
-                  setIsDirty(true);
-                }}
-                rows={18}
-                placeholder="Write policy content here..."
-                className="w-full p-4 bg-slate-50/70 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 font-mono leading-relaxed placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#38B449]/20 focus:border-[#38B449] transition-all resize-y"
-              />
-            )}
-          </div>
-        </div>
+          return (
+            <PolicyCard
+              key={cfg.slug}
+              title={displayTitle}
+              status={isPublished ? 'Published' : 'Draft'}
+              description={cfg.description}
+              updatedDate={updatedDate}
+              icon={cfg.icon}
+              onEdit={() =>
+                policy &&
+                handleOpenEdit({
+                  ...policy,
+                  title: policy.title || cfg.title,
+                })
+              }
+              onViewLive={() =>
+                policy &&
+                handleOpenPreview({
+                  ...policy,
+                  title: policy.title || cfg.title,
+                })
+              }
+            />
+          );
+        })}
       </div>
+
+      {/* Edit Policy Modal with WYSIWYG Rich Text Editor */}
+      <PolicyEditModal
+        isOpen={Boolean(editingPolicy)}
+        policy={editingPolicy}
+        isSaving={updateMutation.isPending}
+        onClose={() => setEditingPolicy(null)}
+        onSave={handleSavePolicy}
+      />
+
+      {/* Live Preview Modal */}
+      <PolicyLivePreviewModal
+        isOpen={Boolean(previewPolicy)}
+        policy={previewPolicy}
+        onClose={() => setPreviewPolicy(null)}
+        onEdit={(pol) => handleOpenEdit(pol)}
+      />
+
+      {/* Audit Log / Revision History Modal */}
+      <AuditLogModal
+        isOpen={isAuditLogOpen}
+        filterDocument={auditLogDocument}
+        onClose={() => setIsAuditLogOpen(false)}
+      />
     </div>
   );
 };

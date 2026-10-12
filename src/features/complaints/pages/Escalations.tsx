@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Flame } from 'lucide-react';
 import { useEscalationsQuery } from '../hooks/useEscalations';
 import { EscalationTable } from '../components/CaseTable';
 import { CaseDetailsDrawer } from '../components/CaseDetailsDrawer';
@@ -27,7 +26,6 @@ export const Escalations: React.FC = () => {
   return (
     <div className="space-y-6">
       <CasePageHeader
-        icon={<Flame className="w-7 h-7 text-rose-600 dark:text-rose-400" />}
         title="Escalation Cases"
         subtitle="Prioritized review of critical service failures, high-liability damages, repeated disputes, and manager interventions."
         isFetching={isFetching}

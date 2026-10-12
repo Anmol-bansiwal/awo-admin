@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Scale } from 'lucide-react';
 import { useDisputesQuery } from '../hooks/useDisputes';
 import { DisputeTable } from '../components/CaseTable';
 import { CaseDetailsDrawer } from '../components/CaseDetailsDrawer';
@@ -25,7 +24,6 @@ export const Disputes: React.FC = () => {
   return (
     <div className="space-y-6">
       <CasePageHeader
-        icon={<Scale className="w-7 h-7 text-amber-600 dark:text-amber-400" />}
         title="Provider Disputes"
         subtitle="Review service claims, payout hold objections, and contract disagreements submitted by service providers."
         isFetching={isFetching}

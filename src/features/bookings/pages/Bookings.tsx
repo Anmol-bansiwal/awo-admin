@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { Booking } from '../bookings.types';
 import { useBookingsQuery } from '../hooks/useBookings';
 import { BookingTable } from '../components/BookingTable';
@@ -8,17 +9,33 @@ import { BookingDetailsDrawer } from '../components/BookingDetailsDrawer';
 const PAGE_SIZE = 20;
 
 export const Bookings: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlStatus = searchParams.get('status')?.toLowerCase();
+
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
+  const [selectedStatus, setSelectedStatus] = useState(() => {
+    if (urlStatus && ['all', 'active', 'in_progress', 'pending', 'completed', 'cancelled'].includes(urlStatus)) {
+      return urlStatus;
+    }
+    return 'all';
+  });
+
+  // Sync with URL query parameter changes
+  useEffect(() => {
+    if (urlStatus && ['all', 'active', 'in_progress', 'pending', 'completed', 'cancelled'].includes(urlStatus)) {
+      setSelectedStatus(urlStatus);
+      setPage(1);
+    }
+  }, [urlStatus]);
 
   // Booking Details Drawer State (slide-over without route change)
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Debounce search query to prevent excessive API calls
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchQuery);
     }, 400);
@@ -40,6 +57,15 @@ export const Bookings: React.FC = () => {
   const handleStatusChange = (status: string) => {
     setSelectedStatus(status);
     setPage(1);
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (status === 'all') {
+        next.delete('status');
+      } else {
+        next.set('status', status);
+      }
+      return next;
+    });
   };
 
   const handleViewDetails = (booking: Booking) => {
@@ -53,7 +79,16 @@ export const Bookings: React.FC = () => {
   const filteredBookings = rawBookings.filter((booking) => {
     if (selectedStatus === 'active') {
       const normalizedStatus = (booking.status || '').toLowerCase();
-      return ['active', 'in_progress', 'en_route', 'assigned', 'accepted'].includes(normalizedStatus);
+      return [
+        'active',
+        'in_progress',
+        'inprogress',
+        'en_route',
+        'enroute',
+        'assigned',
+        'accepted',
+        'pending',
+      ].includes(normalizedStatus);
     }
     return true;
   });

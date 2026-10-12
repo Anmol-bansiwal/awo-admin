@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
+import { AdminProfileDropdown } from './AdminProfileDropdown';
 
 interface HeaderProps {
   onToggleMobileSidebar: () => void;
@@ -30,15 +31,15 @@ const EXACT_PAGE_MAP: Record<string, PageMeta> = {
     description: 'Monitor and manage platform service appointments and dispatch status.',
   },
   '/announcements': {
-    title: 'Platform Announcements',
+    title: 'Notifications & Content',
     description: 'Publish platform advisories, policy updates, and service announcements.',
   },
   '/notification-settings': {
-    title: 'Notification Settings',
+    title: 'Notifications & Content',
     description: 'Configure delivery channels (Email, SMS, Push, In-App) across event triggers.',
   },
   '/policies-content': {
-    title: 'Policies & Static Content',
+    title: 'Notifications & Content',
     description: 'Manage legal agreements, terms of service, and company informational documentation.',
   },
   '/transactions': {
@@ -108,14 +109,14 @@ const PREFIX_PAGE_RULES: { prefix: string; meta: PageMeta }[] = [
   {
     prefix: '/service-categories',
     meta: {
-      title: 'Service Categories',
+      title: 'Notifications & Content',
       description: 'Manage the service categories, icons, and status available on the platform.',
     },
   },
   {
     prefix: '/categories',
     meta: {
-      title: 'Service Categories',
+      title: 'Notifications & Content',
       description: 'Manage the service categories, icons, and status available on the platform.',
     },
   },
@@ -137,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileSidebar }) => {
   const headerInfo = getPageHeaderInfo(location.pathname);
 
   return (
-    <header className="h-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between transition-colors duration-200">
+    <header className="h-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between transition-colors duration-200">
       {/* Left: Mobile Sidebar Toggle + Dynamic Page Header */}
       <div className="flex items-center space-x-3 sm:space-x-4">
         <button
@@ -149,7 +150,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileSidebar }) => {
         </button>
 
         <div className="flex flex-col">
-          <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
             {headerInfo.title}
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
@@ -158,9 +159,11 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileSidebar }) => {
         </div>
       </div>
 
-      {/* Right: Quick Tools & Notification Actions */}
+      {/* Right: Quick Tools, Search Pill, ThemeToggle & Admin Profile */}
       <div className="flex items-center space-x-3 sm:space-x-4">
+        
         <ThemeToggle />
+        <AdminProfileDropdown variant="header" />
       </div>
     </header>
   );
