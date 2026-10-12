@@ -60,7 +60,6 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
     data: kycData,
     isLoading: isKycLoading,
     isError: isKycError,
-    error: kycFetchError,
     refetch: refetchKyc,
     isFetching: isKycFetching,
   } = useProviderKycQuery(provider?.id || '');
@@ -271,16 +270,8 @@ export const ProviderKycModal: React.FC<ProviderKycModalProps> = ({
           ) : isKycError && !kycData ? (
             <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs space-y-2">
               <p className="font-semibold">Unable to retrieve live KYC verification record.</p>
-              <p className="text-[11px] text-rose-600 dark:text-rose-400">
-                {(kycFetchError as any)?.message || 'Endpoint returned an error.'}
-              </p>
-              <button
-                type="button"
-                onClick={() => refetchKyc()}
-                className="mt-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/50 rounded-lg font-bold text-xs"
-              >
-                Retry
-              </button>
+              
+              
             </div>
           ) : (
             <>

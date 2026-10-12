@@ -7,7 +7,6 @@ import {
   Ban,
   CheckCircle2,
   ArrowLeft,
-  Shield,
   FileCheck,
   Award,
   Briefcase,
@@ -99,10 +98,7 @@ export const ProviderDetailsView: React.FC<ProviderDetailsViewProps> = ({
 
             <p className="text-xs text-slate-500 dark:text-slate-400 font-normal">{provider.email || '—'}</p>
 
-            <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-semibold capitalize">
-              <Shield className="w-3 h-3 text-slate-500 dark:text-slate-400" />
-              <span>{provider.role || 'provider'}</span>
-            </div>
+          
           </div>
         </div>
 

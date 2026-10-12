@@ -10,7 +10,7 @@ interface HeaderProps {
 
 interface PageMeta {
   title: string;
-  description: string;
+  description?: string;
 }
 
 const EXACT_PAGE_MAP: Record<string, PageMeta> = {
@@ -43,44 +43,44 @@ const EXACT_PAGE_MAP: Record<string, PageMeta> = {
     description: 'Manage legal agreements, terms of service, and company informational documentation.',
   },
   '/transactions': {
-    title: 'Transactions',
-    description: 'Audit financial transaction logs and payment records.',
+    title: 'Finanncial management'
+    // description: 'Audit financial transaction logs and payment records.',
   },
   '/escrow': {
-    title: 'Escrow Management',
-    description: 'Oversight of customer escrow deposits and security holdings.',
+    title: 'Finanncial management',
+    // description: 'Oversight of customer escrow deposits and security holdings.',
   },
   '/payouts': {
-    title: 'Provider Payouts',
-    description: 'Process and review provider bank disbursements and earnings.',
+    title: 'Finanncial management',
+    // description: 'Process and review provider bank disbursements and earnings.',
   },
   '/refunds': {
-    title: 'Refunds',
-    description: 'Audit processed customer refunds and chargebacks.',
+    title: 'Finanncial management',
+    // description: 'Audit processed customer refunds and chargebacks.',
   },
   '/commission': {
-    title: 'Commission Management',
-    description: 'Configure platform fee rates and commission models.',
+    title: 'Finanncial management',
+    // description: 'Configure platform fee rates and commission models.',
   },
   '/revenue-reports': {
-    title: 'Revenue Reports',
-    description: 'Financial performance analytics and revenue statements.',
+    title: 'Finanncial management',
+    // description: 'Financial performance analytics and revenue statements.',
   },
   '/complaints': {
-    title: 'Customer Complaints',
-    description: 'Investigate and resolve customer service complaints.',
+    title: 'Complaint & Disputes',
+    // description: 'Investigate and resolve customer service complaints.',
   },
   '/disputes': {
-    title: 'Provider Disputes',
-    description: 'Review and mediate provider dispute cases and contract issues.',
+    title: 'Complaint & Disputes',
+    // description: 'Review and mediate provider dispute cases and contract issues.',
   },
   '/refund-requests': {
-    title: 'Refund Requests',
-    description: 'Review, approve, or reject pending customer refund claims.',
+    title: 'Complaint & Disputes',
+    // description: 'Review, approve, or reject pending customer refund claims.',
   },
   '/escalations': {
-    title: 'Escalation Cases',
-    description: 'Critical high-priority cases requiring executive or legal review.',
+    title: 'Complaint & Disputes',
+    // description: 'Critical high-priority cases requiring executive or legal review.',
   },
 };
 
